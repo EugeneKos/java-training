@@ -10,6 +10,7 @@ import ru.eugene.java.learn.structure.bridge.TV;
 import ru.eugene.java.learn.structure.decorator.DataSourceDecorator;
 import ru.eugene.java.learn.structure.decorator.DataSourceExampleImpl;
 import ru.eugene.java.learn.structure.facade.Facade;
+import ru.eugene.java.learn.structure.linker.Frame;
 
 public class StructureMain {
     public static void main(String[] args) {
@@ -17,6 +18,7 @@ public class StructureMain {
         testBridge();
         testDecorator();
         testFacade();
+        testLinker();
     }
 
     private static void testAdapter(){
@@ -43,5 +45,10 @@ public class StructureMain {
     private static void testFacade(){
         Facade facade = new Facade();
         facade.performHardLogic();
+    }
+
+    private static void testLinker(){
+        Frame frame = new Frame();
+        frame.show();
     }
 }
