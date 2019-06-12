@@ -6,12 +6,7 @@ public class UpperCaseMiddleware extends Middleware {
     }
 
     @Override
-    public String getName() {
-        return "upper case";
-    }
-
-    @Override
-    public boolean checkMe(String message) {
+    public boolean check(String message) {
         int count = 0;
         for (int i = 0; i < message.length(); i++) {
             String sym = message.charAt(i) + "";
@@ -19,6 +14,11 @@ public class UpperCaseMiddleware extends Middleware {
                 count++;
             }
         }
-        return count >= 3;
+        if(count >= 3){
+            System.out.println("check upper case true");
+            return nextCheck(message);
+        }
+        System.err.println("check upper case false");
+        return false;
     }
 }

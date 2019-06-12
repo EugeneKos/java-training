@@ -9,6 +9,6 @@ public class BehaviourMain {
 
     private static void testChainOfResponsibility(){
         MessageChecker messageChecker = new MessageChecker();
-        messageChecker.checkMessage("ckffkfdfefeteASDSS");
+        messageChecker.checkMessage("ckffANH8as");
     }
 }

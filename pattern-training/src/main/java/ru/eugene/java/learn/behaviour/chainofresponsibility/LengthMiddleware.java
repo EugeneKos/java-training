@@ -6,12 +6,12 @@ public class LengthMiddleware extends Middleware {
     }
 
     @Override
-    public String getName() {
-        return "message length";
-    }
-
-    @Override
-    public boolean checkMe(String message) {
-        return message.length() >= 8;
+    public boolean check(String message) {
+        if(message.length() >= 8){
+            System.out.println("check length true");
+            return nextCheck(message);
+        }
+        System.err.println("check length false");
+        return false;
     }
 }

@@ -7,26 +7,13 @@ public abstract class Middleware {
         this.next = next;
     }
 
-    public abstract String getName();
+    public abstract boolean check(String message);
 
-    public abstract boolean checkMe(String message);
-
-    public boolean check(String message){
-        // fixme : Цепочка не работает
-        if(checkMe(message)){
-            System.out.println("check " + getName() + " true");
-            return checkNext(message);
-        } else {
-            System.err.println("check " + getName() + " false");
-            return false;
-        }
-    }
-
-    private boolean checkNext(String message){
+    protected boolean nextCheck(String message){
         if(next == null){
             return true;
         }
-        return next.checkMe(message);
+        return next.check(message);
     }
 
 

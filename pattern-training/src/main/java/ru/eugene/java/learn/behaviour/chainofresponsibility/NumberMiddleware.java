@@ -6,13 +6,12 @@ public class NumberMiddleware extends Middleware {
     }
 
     @Override
-    public String getName() {
-        return "contains numbers";
-    }
-
-    @Override
-    public boolean checkMe(String message) {
-
+    public boolean check(String message) {
+        if(message.matches(".*\\d+.*")){
+            System.out.println("check contains number true");
+            return nextCheck(message);
+        }
+        System.err.println("check contains number false");
         return false;
     }
 }
