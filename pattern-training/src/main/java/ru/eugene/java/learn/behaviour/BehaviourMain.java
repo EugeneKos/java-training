@@ -3,12 +3,14 @@ package ru.eugene.java.learn.behaviour;
 import ru.eugene.java.learn.behaviour.chainofresponsibility.MessageChecker;
 import ru.eugene.java.learn.behaviour.command.GUI;
 import ru.eugene.java.learn.behaviour.mediator.*;
+import ru.eugene.java.learn.behaviour.observer.*;
 
 public class BehaviourMain {
     public static void main(String[] args) {
         testChainOfResponsibility();
         testCommand();
         testMediator();
+        testObserver();
     }
 
     private static void testChainOfResponsibility(){
@@ -35,5 +37,15 @@ public class BehaviourMain {
         // имитируем набор текста в текстовое поле
         text.setCurrentText("Hi I am Mediator");
         button.click();
+    }
+
+    private static void testObserver(){
+        EventManager eventManager = new EventManager();
+        eventManager.addSubscribe(EventType.NEW_PRODUCT, new NewProductEventListener());
+        eventManager.addSubscribe(EventType.STORE_PROMOTION, new StorePromotionEventListener());
+
+        Shop shop = new Shop(eventManager);
+        shop.newProduct();
+        shop.sale();
     }
 }
