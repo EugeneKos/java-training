@@ -6,6 +6,8 @@ import ru.eugene.java.learn.behaviour.iterator.CustomArray;
 import ru.eugene.java.learn.behaviour.mediator.*;
 import ru.eugene.java.learn.behaviour.memento.Person;
 import ru.eugene.java.learn.behaviour.observer.*;
+import ru.eugene.java.learn.behaviour.state.FullCartridgePrinterState;
+import ru.eugene.java.learn.behaviour.state.HPPrinter;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -19,6 +21,7 @@ public class BehaviourMain {
         testIterator();
         testObserver();
         testMemento();
+        testState();
     }
 
     private static void testChainOfResponsibility(){
@@ -168,5 +171,13 @@ public class BehaviourMain {
 
         person.undo();
         System.out.println("undo 6: " + person);
+    }
+
+    private static void testState(){
+        HPPrinter hpPrinter = new HPPrinter();
+        hpPrinter.setPrinterState(new FullCartridgePrinterState(hpPrinter));
+        for (int i=0; i<205; i++){
+            hpPrinter.print("some text " + i);
+        }
     }
 }
