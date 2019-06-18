@@ -12,6 +12,9 @@ import ru.eugene.java.learn.behaviour.strategy.Navigator;
 import ru.eugene.java.learn.behaviour.strategy.PublicTransportStrategy;
 import ru.eugene.java.learn.behaviour.strategy.RoadStrategy;
 import ru.eugene.java.learn.behaviour.strategy.WalkingStrategy;
+import ru.eugene.java.learn.behaviour.templatemethod.AbstractClass;
+import ru.eugene.java.learn.behaviour.templatemethod.ConcreteClass1;
+import ru.eugene.java.learn.behaviour.templatemethod.ConcreteClass2;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -27,6 +30,7 @@ public class BehaviourMain {
         testMemento();
         testState();
         testStrategy();
+        testTemplateMethod();
     }
 
     private static void testChainOfResponsibility(){
@@ -194,5 +198,12 @@ public class BehaviourMain {
         navigator.buildRoute('A', 'B');
         navigator.setRouteStrategy(new WalkingStrategy());
         navigator.buildRoute('A', 'B');
+    }
+
+    private static void testTemplateMethod(){
+        AbstractClass abstractClass = new ConcreteClass1();
+        abstractClass.performAlgorithm();
+        abstractClass = new ConcreteClass2();
+        abstractClass.performAlgorithm();
     }
 }
