@@ -15,6 +15,11 @@ import ru.eugene.java.learn.behaviour.strategy.WalkingStrategy;
 import ru.eugene.java.learn.behaviour.templatemethod.AbstractClass;
 import ru.eugene.java.learn.behaviour.templatemethod.ConcreteClass1;
 import ru.eugene.java.learn.behaviour.templatemethod.ConcreteClass2;
+import ru.eugene.java.learn.behaviour.visitor.Bank;
+import ru.eugene.java.learn.behaviour.visitor.User;
+import ru.eugene.java.learn.behaviour.visitor.Visitor;
+import ru.eugene.java.learn.behaviour.visitor.VisitorImpl;
+import ru.eugene.java.learn.behaviour.visitor.var2.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -31,6 +36,8 @@ public class BehaviourMain {
         testState();
         testStrategy();
         testTemplateMethod();
+        testVisitor();
+        testVisitorVar2();
     }
 
     private static void testChainOfResponsibility(){
@@ -205,5 +212,30 @@ public class BehaviourMain {
         abstractClass.performAlgorithm();
         abstractClass = new ConcreteClass2();
         abstractClass.performAlgorithm();
+    }
+
+    private static void testVisitor(){
+        User user = new User(12L, "Eugene", "Pass123");
+        Bank bank = new Bank();
+        bank.setName("VTB");
+        bank.setDescription("Самый выгодный вклад");
+
+        Visitor visitor = new VisitorImpl();
+
+        user.accept(visitor);
+        bank.accept(visitor);
+    }
+
+    /**
+     * Пример того почему используется двойная диспетчеризация.
+     * Перегрузка методов в классе Exporter не подойдет, будет выбираться метод с
+     * входным параметром Shape.
+     */
+    private static void testVisitorVar2(){
+        Shape[] shapes = new Shape[] {new Circle(), new Dot()};
+        Exporter exporter = new ExporterImpl();
+        for (Shape shape : shapes){
+            exporter.export(shape);
+        }
     }
 }
