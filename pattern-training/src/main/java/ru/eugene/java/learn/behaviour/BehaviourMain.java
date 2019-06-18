@@ -8,6 +8,10 @@ import ru.eugene.java.learn.behaviour.memento.Person;
 import ru.eugene.java.learn.behaviour.observer.*;
 import ru.eugene.java.learn.behaviour.state.FullCartridgePrinterState;
 import ru.eugene.java.learn.behaviour.state.HPPrinter;
+import ru.eugene.java.learn.behaviour.strategy.Navigator;
+import ru.eugene.java.learn.behaviour.strategy.PublicTransportStrategy;
+import ru.eugene.java.learn.behaviour.strategy.RoadStrategy;
+import ru.eugene.java.learn.behaviour.strategy.WalkingStrategy;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -22,6 +26,7 @@ public class BehaviourMain {
         testObserver();
         testMemento();
         testState();
+        testStrategy();
     }
 
     private static void testChainOfResponsibility(){
@@ -179,5 +184,15 @@ public class BehaviourMain {
         for (int i=0; i<205; i++){
             hpPrinter.print("some text " + i);
         }
+    }
+
+    private static void testStrategy(){
+        Navigator navigator = new Navigator();
+        navigator.setRouteStrategy(new RoadStrategy());
+        navigator.buildRoute('A', 'B');
+        navigator.setRouteStrategy(new PublicTransportStrategy());
+        navigator.buildRoute('A', 'B');
+        navigator.setRouteStrategy(new WalkingStrategy());
+        navigator.buildRoute('A', 'B');
     }
 }
