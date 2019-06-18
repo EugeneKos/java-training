@@ -4,6 +4,7 @@ import ru.eugene.java.learn.behaviour.chainofresponsibility.MessageChecker;
 import ru.eugene.java.learn.behaviour.command.GUI;
 import ru.eugene.java.learn.behaviour.iterator.CustomArray;
 import ru.eugene.java.learn.behaviour.mediator.*;
+import ru.eugene.java.learn.behaviour.memento.Person;
 import ru.eugene.java.learn.behaviour.observer.*;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class BehaviourMain {
         testMediator();
         testIterator();
         testObserver();
+        testMemento();
     }
 
     private static void testChainOfResponsibility(){
@@ -123,5 +125,48 @@ public class BehaviourMain {
         Shop shop = new Shop(eventManager);
         shop.newProduct();
         shop.sale();
+    }
+
+    private static void testMemento(){
+        Person person = new Person("Eugene", "Kosinov", 23);
+        System.out.println("save: " + person);
+        person.save();
+
+        person.setAge(45);
+        person.save();
+        System.out.println("update 1: " + person);
+
+        person.setAge(49);
+        person.save();
+        System.out.println("update 2: " + person);
+
+        person.setAge(32);
+        person.save();
+        System.out.println("update 3: " + person);
+
+        person.setAge(15);
+        person.save();
+        System.out.println("update 4: " + person);
+
+        person.setAge(16);
+        System.out.println("update 5: " + person);
+
+        person.undo();
+        System.out.println("undo 1: " + person);
+
+        person.undo();
+        System.out.println("undo 2: " + person);
+
+        person.undo();
+        System.out.println("undo 3: " + person);
+
+        person.undo();
+        System.out.println("undo 4: " + person);
+
+        person.undo();
+        System.out.println("undo 5: " + person);
+
+        person.undo();
+        System.out.println("undo 6: " + person);
     }
 }
