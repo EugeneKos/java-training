@@ -12,6 +12,7 @@
         <module>spring-training</module>
         <module>pattern-training</module>
         <module>security</module>
+        <module>hibernate-orm-training</module>
     </modules>
 
 
