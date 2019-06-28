@@ -1,9 +1,14 @@
 package ru.eugene.java.learn.data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "automobile")
+@Table(
+        name = "automobile",
+        uniqueConstraints = {@UniqueConstraint(name = "state_number_uk", columnNames = "state_number")},
+        indexes = {@Index(name = "state_number_ix", columnList = "state_number")})
+
 public class Automobile {
     @Id
     @SequenceGenerator(name = "id_seq", sequenceName = "id_seq")
@@ -22,6 +27,9 @@ public class Automobile {
     @ManyToOne(targetEntity = Person.class)
     @JoinColumn(name = "person_id", foreignKey = @ForeignKey(name = "automobile_person_fk"))
     private Person person;
+
+    @ManyToMany(mappedBy = "automobiles", fetch = FetchType.EAGER)
+    private List<CarService> carServices;
 
     public Long getId() {
         return id;
@@ -61,5 +69,13 @@ public class Automobile {
 
     public void setPerson(Person person) {
         this.person = person;
+    }
+
+    public List<CarService> getCarServices() {
+        return carServices;
+    }
+
+    public void setCarServices(List<CarService> carServices) {
+        this.carServices = carServices;
     }
 }

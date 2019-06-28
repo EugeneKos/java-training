@@ -2,7 +2,9 @@ package ru.eugene.java.learn.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.eugene.java.learn.data.Automobile;
+import ru.eugene.java.learn.exception.NotFoundException;
 import ru.eugene.java.learn.repository.AutomobileRepository;
 import ru.eugene.java.learn.service.IAutomobileService;
 
@@ -15,6 +17,7 @@ public class AutomobileService implements IAutomobileService {
         this.automobileRepository = automobileRepository;
     }
 
+    @Transactional
     @Override
     public Automobile create(String mark, String model, String stateNumber) {
         Automobile automobile = new Automobile();
@@ -22,5 +25,11 @@ public class AutomobileService implements IAutomobileService {
         automobile.setModel(model);
         automobile.setStateNumber(stateNumber);
         return automobileRepository.save(automobile);
+    }
+
+    @Override
+    public Automobile getById(Long id) {
+        return automobileRepository.getById(id)
+                .orElseThrow(() -> new NotFoundException("automobile by id: " + id + " not found"));
     }
 }

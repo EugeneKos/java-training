@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.eugene.java.learn.data.Person;
+import ru.eugene.java.learn.exception.NotFoundException;
 import ru.eugene.java.learn.repository.PersonRepository;
 import ru.eugene.java.learn.service.IPersonService;
 
@@ -23,5 +24,11 @@ public class PersonServiceImpl implements IPersonService {
         person.setName(name);
         person.setSurname(surname);
         return personRepository.save(person);
+    }
+
+    @Override
+    public Person getById(Long id) {
+        return personRepository.getById(id)
+                .orElseThrow(() -> new NotFoundException("person by id: " + id + " not found"));
     }
 }

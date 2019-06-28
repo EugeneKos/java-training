@@ -26,7 +26,7 @@ public class DataConfiguration {
 
     private final String dialect = "org.hibernate.dialect.PostgresPlusDialect";
     private final String showSql = "true";
-    private final String hbm2ddlAuto = "create";
+    private final String hbm2ddlAuto = "update";
 
     @Bean
     public DataSource dataSource(){

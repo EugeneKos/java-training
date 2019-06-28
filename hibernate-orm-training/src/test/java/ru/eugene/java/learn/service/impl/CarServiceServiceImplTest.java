@@ -6,26 +6,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ru.eugene.java.learn.config.SpringConfiguration;
-import ru.eugene.java.learn.data.Automobile;
-import ru.eugene.java.learn.service.IAutomobileService;
+import ru.eugene.java.learn.data.CarService;
+import ru.eugene.java.learn.service.ICarServiceService;
 
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {SpringConfiguration.class})
-public class AutomobileServiceTest {
+public class CarServiceServiceImplTest {
     @Autowired
-    private IAutomobileService automobileService;
+    private ICarServiceService carServiceService;
 
     @Test
     public void testCreate(){
-        Automobile automobile = automobileService.create("Audi", "S8", "о005АА77");
-        assertNotNull("automobile not null", automobile);
+        CarService carService = carServiceService.create("kotmar-auto");
+        assertNotNull("car service not null", carService);
     }
 
     @Test
     public void testGetById(){
-        Automobile automobile = automobileService.getById(102L);
-        assertNotNull("automobile not null", automobile);
+        CarService carService = carServiceService.getById(52L);
+        assertNotNull(carService);
     }
 }
