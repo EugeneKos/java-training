@@ -5,13 +5,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.eugene.java.learn.data.Automobile;
 import ru.eugene.java.learn.data.CarService;
+import ru.eugene.java.learn.data.Passport;
 import ru.eugene.java.learn.data.Person;
 import ru.eugene.java.learn.repository.AutomobileRepository;
 import ru.eugene.java.learn.repository.CarServiceRepository;
-import ru.eugene.java.learn.service.IAutomobileService;
-import ru.eugene.java.learn.service.IBindService;
-import ru.eugene.java.learn.service.ICarServiceService;
-import ru.eugene.java.learn.service.IPersonService;
+import ru.eugene.java.learn.repository.PassportRepository;
+import ru.eugene.java.learn.service.*;
 
 import java.util.List;
 
@@ -20,18 +19,22 @@ public class BindServiceImpl implements IBindService {
     private IPersonService personService;
     private IAutomobileService automobileService;
     private ICarServiceService carServiceService;
+    private IPassportService passportService;
 
     private AutomobileRepository automobileRepository;
     private CarServiceRepository carServiceRepository;
+    private PassportRepository passportRepository;
 
     @Autowired
     public BindServiceImpl(IPersonService personService,
                            IAutomobileService automobileService,
-                           ICarServiceService carServiceService) {
+                           ICarServiceService carServiceService,
+                           IPassportService passportService) {
 
         this.personService = personService;
         this.automobileService = automobileService;
         this.carServiceService = carServiceService;
+        this.passportService = passportService;
     }
 
     @Autowired
@@ -42,6 +45,11 @@ public class BindServiceImpl implements IBindService {
     @Autowired
     public void setCarServiceRepository(CarServiceRepository carServiceRepository) {
         this.carServiceRepository = carServiceRepository;
+    }
+
+    @Autowired
+    public void setPassportRepository(PassportRepository passportRepository) {
+        this.passportRepository = passportRepository;
     }
 
     @Transactional
@@ -81,5 +89,20 @@ public class BindServiceImpl implements IBindService {
         automobiles.remove(automobile);
         carService.setAutomobiles(automobiles);
         carServiceRepository.save(carService);
+    }
+
+    @Override
+    public void bindPassportToPerson(Long passportId, Long personId) {
+        Person person = personService.getById(personId);
+        Passport passport = passportService.getById(passportId);
+        passport.setPerson(person);
+        passportRepository.save(passport);
+    }
+
+    @Override
+    public void unbindPassportFromPerson(Long idPassport) {
+        Passport passport = passportService.getById(idPassport);
+        passport.setPerson(null);
+        passportRepository.save(passport);
     }
 }

@@ -18,22 +18,31 @@ public class BindServiceImplTest {
 
     @Test
     public void testBindAutomobileToPerson(){
-        bindService.bindAutomobileToPerson(102L, 1L);
+        bindService.bindAutomobileToPerson(1L, 2L);
     }
 
     @Test
     public void testUnbindAutomobileFromPerson(){
-        bindService.unbindAutomobileFromPerson(102L);
+        bindService.unbindAutomobileFromPerson(1L);
     }
 
     @Test
     public void testBindAutomobileToCarService(){
-        bindService.bindAutomobileToCarService(102L, 52L);
-        bindService.bindAutomobileToCarService(152L, 52L);
+        bindService.bindAutomobileToCarService(1L, 3L);
     }
 
     @Test
     public void testUnbindAutomobileFromCarService(){
-        bindService.unbindAutomobileFromCarService(102L, 52L);
+        bindService.unbindAutomobileFromCarService(1L, 3L);
+    }
+
+    @Test
+    public void testBindPassportToPerson(){
+        bindService.bindPassportToPerson(4L, 2L);
+    }
+
+    @Test
+    public void testUnbindPassportFromPerson(){
+        bindService.unbindPassportFromPerson(4L);
     }
 }

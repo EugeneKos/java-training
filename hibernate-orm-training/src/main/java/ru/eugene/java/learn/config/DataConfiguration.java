@@ -18,9 +18,9 @@ import java.util.Properties;
 @EnableJpaRepositories(basePackages = "ru.eugene.java.learn.repository")
 public class DataConfiguration {
     private final String driverClassName = "org.postgresql.Driver";
-    private final String url = "jdbc:postgresql://localhost:5432/web?currentSchema=orm_test";
-    private final String username = "web_user";
-    private final String password = "web_user";
+    private final String url = "jdbc:postgresql://localhost:5432/postgres?currentSchema=orm_test";
+    private final String username = "postgres";
+    private final String password = "postgres";
 
     private final String[] packagesToScan = new String[]{"ru.eugene.java.learn.data"};
 

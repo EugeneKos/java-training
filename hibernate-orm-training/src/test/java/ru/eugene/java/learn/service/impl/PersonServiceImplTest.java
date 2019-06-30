@@ -22,4 +22,13 @@ public class PersonServiceImplTest {
         Person person = personService.create("Eugene", "Kosinov");
         assertNotNull("person not null", person);
     }
+
+    @Test
+    public void testGetById(){
+        Person person = personService.getById(2L);
+        assertNotNull(person);
+        assertNotNull(person.getAutomobiles());
+        //System.out.println(person.getAutomobiles());
+        System.out.println(person.getPassport());
+    }
 }

@@ -6,4 +6,7 @@ public interface IBindService {
 
     void bindAutomobileToCarService(Long idAutomobile, Long idCarService);
     void unbindAutomobileFromCarService(Long idAutomobile, Long idCarService);
+
+    void bindPassportToPerson(Long passportId, Long personId);
+    void unbindPassportFromPerson(Long idPassport);
 }

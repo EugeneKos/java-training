@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Automobile {
     @Id
-    @SequenceGenerator(name = "id_seq", sequenceName = "id_seq")
+    @SequenceGenerator(name = "id_seq", sequenceName = "id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_seq")
     private Long id;
 

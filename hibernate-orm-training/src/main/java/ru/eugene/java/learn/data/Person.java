@@ -7,7 +7,7 @@ import java.util.List;
 @Table(name = "person")
 public class Person {
     @Id
-    @SequenceGenerator(name = "id_seq", sequenceName = "id_seq")
+    @SequenceGenerator(name = "id_seq", sequenceName = "id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_seq")
     private Long id;
 
@@ -19,6 +19,9 @@ public class Person {
 
     @OneToMany(mappedBy = "person")
     private List<Automobile> automobiles;
+
+    @OneToOne(mappedBy = "person")
+    private Passport passport;
 
     public Long getId() {
         return id;
@@ -50,5 +53,13 @@ public class Person {
 
     public void setAutomobiles(List<Automobile> automobiles) {
         this.automobiles = automobiles;
+    }
+
+    public Passport getPassport() {
+        return passport;
+    }
+
+    public void setPassport(Passport passport) {
+        this.passport = passport;
     }
 }
