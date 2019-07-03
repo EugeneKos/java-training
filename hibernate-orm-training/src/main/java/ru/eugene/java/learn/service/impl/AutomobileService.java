@@ -32,4 +32,9 @@ public class AutomobileService implements IAutomobileService {
         return automobileRepository.getById(id)
                 .orElseThrow(() -> new NotFoundException("automobile by id: " + id + " not found"));
     }
+
+    @Override
+    public Automobile getByStateNumber(String stateNumber) {
+        return automobileRepository.findByStateNumber(stateNumber);
+    }
 }

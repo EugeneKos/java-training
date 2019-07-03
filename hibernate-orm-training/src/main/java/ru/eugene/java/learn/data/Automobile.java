@@ -15,20 +15,20 @@ public class Automobile {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_seq")
     private Long id;
 
-    @Column(name = "mark")
+    @Column(name = "mark", nullable = false)
     private String mark;
 
-    @Column(name = "model")
+    @Column(name = "model", nullable = false)
     private String model;
 
-    @Column(name = "state_number")
+    @Column(name = "state_number", nullable = false)
     private String stateNumber;
 
     @ManyToOne(targetEntity = Person.class)
     @JoinColumn(name = "person_id", foreignKey = @ForeignKey(name = "automobile_person_fk"))
     private Person person;
 
-    @ManyToMany(mappedBy = "automobiles", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "automobiles")
     private List<CarService> carServices;
 
     public Long getId() {

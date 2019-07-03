@@ -24,11 +24,8 @@ public class AutomobileServiceTest {
     }
 
     @Test
-    public void testGetById(){
-        Automobile automobile = automobileService.getById(1L);
+    public void testGetByStateNumber(){
+        Automobile automobile = automobileService.getByStateNumber("о005АА77");
         assertNotNull("automobile not null", automobile);
-        assertNotNull(automobile.getPerson());
-        System.out.println(automobile.getPerson());
-        System.out.println(automobile.getCarServices());
     }
 }
