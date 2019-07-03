@@ -9,6 +9,8 @@ import ru.eugene.java.learn.config.SpringConfiguration;
 import ru.eugene.java.learn.data.Automobile;
 import ru.eugene.java.learn.service.IAutomobileService;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -27,5 +29,12 @@ public class AutomobileServiceTest {
     public void testGetByStateNumber(){
         Automobile automobile = automobileService.getByStateNumber("о005АА77");
         assertNotNull("automobile not null", automobile);
+    }
+
+    @Test
+    public void testGetAllAutomobileByPersonCode(){
+        List<Automobile> automobiles = automobileService.getAllAutomobilesByPersonCode("code_14");
+        assertNotNull(automobiles);
+        assertEquals("automobile size by person code", 1, automobiles.size());
     }
 }

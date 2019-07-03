@@ -4,17 +4,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.eugene.java.learn.data.Automobile;
+import ru.eugene.java.learn.data.Person;
 import ru.eugene.java.learn.exception.NotFoundException;
 import ru.eugene.java.learn.repository.AutomobileRepository;
 import ru.eugene.java.learn.service.IAutomobileService;
+import ru.eugene.java.learn.service.IPersonService;
+
+import java.util.List;
 
 @Service
 public class AutomobileService implements IAutomobileService {
     private AutomobileRepository automobileRepository;
+    private IPersonService personService;
 
     @Autowired
-    public AutomobileService(AutomobileRepository automobileRepository) {
+    public AutomobileService(AutomobileRepository automobileRepository, IPersonService personService) {
         this.automobileRepository = automobileRepository;
+        this.personService = personService;
     }
 
     @Transactional
@@ -36,5 +42,11 @@ public class AutomobileService implements IAutomobileService {
     @Override
     public Automobile getByStateNumber(String stateNumber) {
         return automobileRepository.findByStateNumber(stateNumber);
+    }
+
+    @Override
+    public List<Automobile> getAllAutomobilesByPersonCode(String personCode) {
+        Person person = personService.getByCode(personCode);
+        return automobileRepository.findAllByPerson(person);
     }
 }
