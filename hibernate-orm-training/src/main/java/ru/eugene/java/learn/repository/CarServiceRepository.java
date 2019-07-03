@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface CarServiceRepository extends CrudRepository<CarService, Long> {
     Optional<CarService> getById(Long id);
+    CarService findByName(String name);
 }

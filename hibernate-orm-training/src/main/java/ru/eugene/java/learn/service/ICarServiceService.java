@@ -5,4 +5,5 @@ import ru.eugene.java.learn.data.CarService;
 public interface ICarServiceService {
     CarService create(String name);
     CarService getById(Long id);
+    CarService getByName(String name);
 }

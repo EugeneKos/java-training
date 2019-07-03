@@ -24,9 +24,8 @@ public class CarServiceServiceImplTest {
     }
 
     @Test
-    public void testGetById(){
-        CarService carService = carServiceService.getById(3L);
+    public void testGetByName(){
+        CarService carService = carServiceService.getByName("kotmar-auto");
         assertNotNull(carService);
-        System.out.println(carService.getAutomobiles());
     }
 }

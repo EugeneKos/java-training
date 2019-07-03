@@ -13,10 +13,10 @@ public class CarService {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_seq")
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = Automobile.class)
     @JoinTable(name = "car_service_automobile",
                 joinColumns = @JoinColumn(name = "car_service_id", foreignKey = @ForeignKey(name = "car_service_id_fk")),
                 inverseJoinColumns = @JoinColumn(name = "automobile_id", foreignKey = @ForeignKey(name = "automobile_id_fk")),

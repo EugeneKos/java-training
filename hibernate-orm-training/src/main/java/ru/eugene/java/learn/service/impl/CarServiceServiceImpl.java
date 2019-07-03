@@ -28,4 +28,9 @@ public class CarServiceServiceImpl implements ICarServiceService {
         return carServiceRepository.getById(id)
                 .orElseThrow(() -> new NotFoundException("car service by id: " + id + " not found"));
     }
+
+    @Override
+    public CarService getByName(String name) {
+        return carServiceRepository.findByName(name);
+    }
 }
