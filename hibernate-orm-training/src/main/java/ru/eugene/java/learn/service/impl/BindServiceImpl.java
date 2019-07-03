@@ -54,17 +54,17 @@ public class BindServiceImpl implements IBindService {
 
     @Transactional
     @Override
-    public void bindAutomobileToPerson(Long idAutomobile, Long idPerson) {
-        Person person = personService.getById(idPerson);
-        Automobile automobile = automobileService.getById(idAutomobile);
+    public void bindAutomobileToPerson(String stateNumberAuto, String personCode) {
+        Person person = personService.getByCode(personCode);
+        Automobile automobile = automobileService.getByStateNumber(stateNumberAuto);
         automobile.setPerson(person);
         automobileRepository.save(automobile);
     }
 
     @Transactional
     @Override
-    public void unbindAutomobileFromPerson(Long idAutomobile) {
-        Automobile automobile = automobileService.getById(idAutomobile);
+    public void unbindAutomobileFromPerson(String stateNumberAuto) {
+        Automobile automobile = automobileService.getByStateNumber(stateNumberAuto);
         automobile.setPerson(null);
         automobileRepository.save(automobile);
     }
@@ -92,16 +92,16 @@ public class BindServiceImpl implements IBindService {
     }
 
     @Override
-    public void bindPassportToPerson(Long passportId, Long personId) {
-        Person person = personService.getById(personId);
-        Passport passport = passportService.getById(passportId);
+    public void bindPassportToPerson(String passportUIN, String personCode) {
+        Person person = personService.getByCode(personCode);
+        Passport passport = passportService.getByUIN(passportUIN);
         passport.setPerson(person);
         passportRepository.save(passport);
     }
 
     @Override
-    public void unbindPassportFromPerson(Long idPassport) {
-        Passport passport = passportService.getById(idPassport);
+    public void unbindPassportFromPerson(String passportUIN) {
+        Passport passport = passportService.getByUIN(passportUIN);
         passport.setPerson(null);
         passportRepository.save(passport);
     }

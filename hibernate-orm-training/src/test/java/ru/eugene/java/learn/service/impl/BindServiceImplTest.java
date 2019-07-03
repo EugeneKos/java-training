@@ -1,5 +1,6 @@
 package ru.eugene.java.learn.service.impl;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,31 +19,33 @@ public class BindServiceImplTest {
 
     @Test
     public void testBindAutomobileToPerson(){
-        bindService.bindAutomobileToPerson(1L, 2L);
+        bindService.bindAutomobileToPerson("о005АА77", "code_14");
     }
 
     @Test
     public void testUnbindAutomobileFromPerson(){
-        bindService.unbindAutomobileFromPerson(1L);
+        bindService.unbindAutomobileFromPerson("о005АА77");
     }
 
     @Test
+    @Ignore
     public void testBindAutomobileToCarService(){
-        bindService.bindAutomobileToCarService(1L, 3L);
+        bindService.bindAutomobileToCarService(3L, 5L);
     }
 
     @Test
+    @Ignore
     public void testUnbindAutomobileFromCarService(){
         bindService.unbindAutomobileFromCarService(1L, 3L);
     }
 
     @Test
     public void testBindPassportToPerson(){
-        bindService.bindPassportToPerson(4L, 2L);
+        bindService.bindPassportToPerson("uin-120845-kosinov-0875", "code_14");
     }
 
     @Test
     public void testUnbindPassportFromPerson(){
-        bindService.unbindPassportFromPerson(4L);
+        bindService.unbindPassportFromPerson("uin-120845-kosinov-0875");
     }
 }
