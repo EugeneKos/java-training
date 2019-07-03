@@ -1,7 +1,6 @@
 package ru.eugene.java.learn.data;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(
@@ -27,9 +26,6 @@ public class Automobile {
     @ManyToOne(targetEntity = Person.class)
     @JoinColumn(name = "person_id", foreignKey = @ForeignKey(name = "automobile_person_fk"))
     private Person person;
-
-    @ManyToMany(mappedBy = "automobiles")
-    private List<CarService> carServices;
 
     public Long getId() {
         return id;
@@ -69,13 +65,5 @@ public class Automobile {
 
     public void setPerson(Person person) {
         this.person = person;
-    }
-
-    public List<CarService> getCarServices() {
-        return carServices;
-    }
-
-    public void setCarServices(List<CarService> carServices) {
-        this.carServices = carServices;
     }
 }

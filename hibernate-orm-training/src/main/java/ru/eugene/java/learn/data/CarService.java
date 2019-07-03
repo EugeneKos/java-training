@@ -16,15 +16,8 @@ public class CarService {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @ManyToMany(targetEntity = Automobile.class)
-    @JoinTable(name = "car_service_automobile",
-                joinColumns = @JoinColumn(name = "car_service_id", foreignKey = @ForeignKey(name = "car_service_id_fk")),
-                inverseJoinColumns = @JoinColumn(name = "automobile_id", foreignKey = @ForeignKey(name = "automobile_id_fk")),
-                uniqueConstraints =
-                        {@UniqueConstraint(name = "car_service_id_automobile_id_uk", columnNames = {"car_service_id", "automobile_id"})},
-                indexes = {@Index(name = "car_service_id_ix", columnList = "car_service_id"),
-                            @Index(name = "automobile_id_ix", columnList = "automobile_id")})
-    private List<Automobile> automobiles;
+    @OneToMany(mappedBy = "carService")
+    private List<CarServiceLinkAuto> carServiceLinkAutos;
 
     public Long getId() {
         return id;
@@ -42,11 +35,11 @@ public class CarService {
         this.name = name;
     }
 
-    public List<Automobile> getAutomobiles() {
-        return automobiles;
+    public List<CarServiceLinkAuto> getCarServiceLinkAutos() {
+        return carServiceLinkAutos;
     }
 
-    public void setAutomobiles(List<Automobile> automobiles) {
-        this.automobiles = automobiles;
+    public void setCarServiceLinkAutos(List<CarServiceLinkAuto> carServiceLinkAutos) {
+        this.carServiceLinkAutos = carServiceLinkAutos;
     }
 }

@@ -3,11 +3,9 @@ package ru.eugene.java.learn.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.eugene.java.learn.data.Automobile;
-import ru.eugene.java.learn.data.CarService;
-import ru.eugene.java.learn.data.Passport;
-import ru.eugene.java.learn.data.Person;
+import ru.eugene.java.learn.data.*;
 import ru.eugene.java.learn.repository.AutomobileRepository;
+import ru.eugene.java.learn.repository.CarServiceLinkAutoRepository;
 import ru.eugene.java.learn.repository.CarServiceRepository;
 import ru.eugene.java.learn.repository.PassportRepository;
 import ru.eugene.java.learn.service.*;
@@ -24,6 +22,7 @@ public class BindServiceImpl implements IBindService {
     private AutomobileRepository automobileRepository;
     private CarServiceRepository carServiceRepository;
     private PassportRepository passportRepository;
+    private CarServiceLinkAutoRepository carServiceLinkAutoRepository;
 
     @Autowired
     public BindServiceImpl(IPersonService personService,
@@ -52,6 +51,11 @@ public class BindServiceImpl implements IBindService {
         this.passportRepository = passportRepository;
     }
 
+    @Autowired
+    public void setCarServiceLinkAutoRepository(CarServiceLinkAutoRepository carServiceLinkAutoRepository) {
+        this.carServiceLinkAutoRepository = carServiceLinkAutoRepository;
+    }
+
     @Transactional
     @Override
     public void bindAutomobileToPerson(String stateNumberAuto, String personCode) {
@@ -71,24 +75,21 @@ public class BindServiceImpl implements IBindService {
 
     @Transactional
     @Override
-    public void bindAutomobileToCarService(Long idAutomobile, Long idCarService) {
-        Automobile automobile = automobileService.getById(idAutomobile);
-        CarService carService = carServiceService.getById(idCarService);
-        List<Automobile> automobiles = carService.getAutomobiles();
-        automobiles.add(automobile);
-        carService.setAutomobiles(automobiles);
-        carServiceRepository.save(carService);
+    public void bindAutomobileToCarService(String stateNumberAuto, String carServiceName) {
+        Automobile automobile = automobileService.getByStateNumber(stateNumberAuto);
+        CarService carService = carServiceService.getByName(carServiceName);
+        CarServiceLinkAuto carServiceLinkAuto = new CarServiceLinkAuto();
+        carServiceLinkAuto.setAutomobile(automobile);
+        carServiceLinkAuto.setCarService(carService);
+        carServiceLinkAutoRepository.save(carServiceLinkAuto);
     }
 
     @Transactional
     @Override
-    public void unbindAutomobileFromCarService(Long idAutomobile, Long idCarService) {
-        Automobile automobile = automobileService.getById(idAutomobile);
-        CarService carService = carServiceService.getById(idCarService);
-        List<Automobile> automobiles = carService.getAutomobiles();
-        automobiles.remove(automobile);
-        carService.setAutomobiles(automobiles);
-        carServiceRepository.save(carService);
+    public void unbindAutomobileFromCarService(String stateNumberAuto, String carServiceName) {
+        Automobile automobile = automobileService.getByStateNumber(stateNumberAuto);
+        CarService carService = carServiceService.getByName(carServiceName);
+        carServiceLinkAutoRepository.deleteByAutomobileAndCarService(automobile, carService);
     }
 
     @Override

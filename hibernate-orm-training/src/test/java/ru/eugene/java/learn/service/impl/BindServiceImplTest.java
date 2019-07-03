@@ -28,15 +28,13 @@ public class BindServiceImplTest {
     }
 
     @Test
-    @Ignore
     public void testBindAutomobileToCarService(){
-        bindService.bindAutomobileToCarService(3L, 5L);
+        bindService.bindAutomobileToCarService("о005АА77", "kotmar-auto");
     }
 
     @Test
-    @Ignore
     public void testUnbindAutomobileFromCarService(){
-        bindService.unbindAutomobileFromCarService(1L, 3L);
+        bindService.unbindAutomobileFromCarService("о005АА77", "kotmar-auto");
     }
 
     @Test
