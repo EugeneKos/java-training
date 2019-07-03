@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface PassportRepository extends CrudRepository<Passport, Long> {
     Optional<Passport> getById(Long id);
+    Passport findByUin(String uin);
 }

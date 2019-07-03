@@ -28,4 +28,9 @@ public class PassportServiceImpl implements IPassportService {
         return passportRepository.getById(id)
                 .orElseThrow(() -> new NotFoundException("passport by id: " + id + " not found"));
     }
+
+    @Override
+    public Passport getByUIN(String uin) {
+        return passportRepository.findByUin(uin);
+    }
 }

@@ -24,7 +24,7 @@ public class PersonServiceImplTest {
     }
 
     @Test
-    public void testGetById(){
+    public void testGetByCode(){
         Person person = personService.getByCode("code_14");
         assertNotNull(person);
     }

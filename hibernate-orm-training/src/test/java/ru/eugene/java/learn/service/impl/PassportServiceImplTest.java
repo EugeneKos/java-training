@@ -19,14 +19,13 @@ public class PassportServiceImplTest {
 
     @Test
     public void testCreate(){
-        Passport passport = passportService.create("dvsdhjdvsd524fhdvj");
+        Passport passport = passportService.create("uin-120845-kosinov-0875");
         assertNotNull("passport not null", passport);
     }
 
     @Test
-    public void testGetById(){
-        Passport passport = passportService.getById(4L);
+    public void testGetByUIN(){
+        Passport passport = passportService.getByUIN("uin-120845-kosinov-0875");
         assertNotNull(passport);
-        System.out.println(passport.getPerson());
     }
 }

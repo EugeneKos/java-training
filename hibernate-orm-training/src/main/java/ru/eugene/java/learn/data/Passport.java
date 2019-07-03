@@ -12,7 +12,7 @@ public class Passport {
     @SequenceGenerator(name = "id_seq", sequenceName = "id_seq", allocationSize = 1)
     private Long id;
 
-    @Column(name = "uin")
+    @Column(name = "uin", nullable = false)
     private String uin;
 
     @OneToOne(targetEntity = Person.class)
