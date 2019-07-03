@@ -7,9 +7,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ru.eugene.java.learn.config.SpringConfiguration;
 import ru.eugene.java.learn.data.Module;
+import ru.eugene.java.learn.data.Param;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -32,6 +35,23 @@ public class ModuleRepositoryTest {
 
         module.setAliases(list);
 
+        Map<Param, String> params = new HashMap<>();
+        params.put(Param.GROUP_ID, "com.sbt.custodian");
+        params.put(Param.ARTIFACT_ID, "custodian-api");
+        params.put(Param.VERSION, "9.0");
+
+        module.setParams(params);
+
         moduleRepository.save(module);
+    }
+
+    @Test
+    public void testGet(){
+        Module module = moduleRepository.findByName("module-test");
+        assertNotNull(module);
+        assertNotNull(module.getAliases());
+        assertNotNull(module.getParams());
+        System.out.println("Aliases: " + module.getAliases());
+        System.out.println("Params: " + module.getParams());
     }
 }

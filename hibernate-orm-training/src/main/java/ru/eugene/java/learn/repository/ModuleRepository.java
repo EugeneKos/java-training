@@ -4,4 +4,5 @@ import org.springframework.data.repository.CrudRepository;
 import ru.eugene.java.learn.data.Module;
 
 public interface ModuleRepository extends CrudRepository<Module, Long> {
+    Module findByName(String name);
 }
