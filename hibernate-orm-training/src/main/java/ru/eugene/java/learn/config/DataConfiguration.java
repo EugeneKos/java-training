@@ -2,8 +2,10 @@ package ru.eugene.java.learn.config;
 
 import org.hibernate.cfg.Environment;
 import org.hibernate.jpa.HibernatePersistenceProvider;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -16,17 +18,25 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "ru.eugene.java.learn.repository")
+@PropertySource("classpath:config.properties")
 public class DataConfiguration {
-    private final String driverClassName = "org.postgresql.Driver";
-    private final String url = "jdbc:postgresql://localhost:5432/postgres?currentSchema=orm_test";
-    private final String username = "postgres";
-    private final String password = "postgres";
+    @Value("${database.driver.class}")
+    private String driverClassName;
+    @Value("${database.url}")
+    private String url;
+    @Value("${database.username}")
+    private String username;
+    @Value("${database.password}")
+    private String password;
 
     private final String[] packagesToScan = new String[]{"ru.eugene.java.learn.data"};
 
-    private final String dialect = "org.hibernate.dialect.PostgresPlusDialect";
-    private final String showSql = "true";
-    private final String hbm2ddlAuto = "update";
+    @Value("${database.hibernate.dialect}")
+    private String dialect;
+    @Value("${database.hibernate.showSql}")
+    private String showSql;
+    @Value("${database.hibernate.hbm2dllAuto}")
+    private String hbm2ddlAuto;
 
     @Bean
     public DataSource dataSource(){
