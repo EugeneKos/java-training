@@ -19,10 +19,11 @@ public class PersonServiceImpl implements IPersonService {
 
     @Transactional
     @Override
-    public Person create(String name, String surname) {
+    public Person create(String name, String surname, String code) {
         Person person = new Person();
         person.setName(name);
         person.setSurname(surname);
+        person.setCode(code);
         return personRepository.save(person);
     }
 
@@ -30,5 +31,10 @@ public class PersonServiceImpl implements IPersonService {
     public Person getById(Long id) {
         return personRepository.getById(id)
                 .orElseThrow(() -> new NotFoundException("person by id: " + id + " not found"));
+    }
+
+    @Override
+    public Person getByCode(String code) {
+        return personRepository.findByCode(code);
     }
 }

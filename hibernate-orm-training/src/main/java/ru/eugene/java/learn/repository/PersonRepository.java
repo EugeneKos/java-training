@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface PersonRepository extends CrudRepository<Person, Long> {
     Optional<Person> getById(Long id);
+    Person findByCode(String code);
 }

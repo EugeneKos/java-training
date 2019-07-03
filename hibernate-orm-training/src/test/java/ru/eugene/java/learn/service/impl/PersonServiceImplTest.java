@@ -19,16 +19,13 @@ public class PersonServiceImplTest {
 
     @Test
     public void testCreate(){
-        Person person = personService.create("Eugene", "Kosinov");
+        Person person = personService.create("Eugene", "Kosinov", "code_14");
         assertNotNull("person not null", person);
     }
 
     @Test
     public void testGetById(){
-        Person person = personService.getById(2L);
+        Person person = personService.getByCode("code_14");
         assertNotNull(person);
-        assertNotNull(person.getAutomobiles());
-        //System.out.println(person.getAutomobiles());
-        System.out.println(person.getPassport());
     }
 }
