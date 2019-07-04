@@ -26,6 +26,13 @@ public class Person {
     @OneToOne(mappedBy = "person")
     private Passport passport;
 
+    @ManyToOne(targetEntity = Company.class)
+    @JoinColumn(name = "company_id", foreignKey = @ForeignKey(name = "person_company_fk"))
+    private Company company;
+
+    @ManyToMany(targetEntity = Bank.class, mappedBy = "people")
+    private List<Bank> banks;
+
     public Long getId() {
         return id;
     }
@@ -72,5 +79,21 @@ public class Person {
 
     public void setPassport(Passport passport) {
         this.passport = passport;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public List<Bank> getBanks() {
+        return banks;
+    }
+
+    public void setBanks(List<Bank> banks) {
+        this.banks = banks;
     }
 }
