@@ -2,6 +2,7 @@ package ru.eugene.java.learn.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.eugene.java.learn.data.Automobile;
 import ru.eugene.java.learn.data.CarService;
 import ru.eugene.java.learn.data.CarServiceLinkAuto;
@@ -28,6 +29,7 @@ public class CarServiceServiceImpl implements ICarServiceService {
         this.carServiceLinkAutoRepository = carServiceLinkAutoRepository;
     }
 
+    @Transactional
     @Override
     public CarService create(String name) {
         CarService carService = new CarService();

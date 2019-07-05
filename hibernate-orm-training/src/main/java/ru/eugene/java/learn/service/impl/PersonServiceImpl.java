@@ -37,4 +37,10 @@ public class PersonServiceImpl implements IPersonService {
     public Person getByCode(String code) {
         return personRepository.findByCode(code);
     }
+
+    @Transactional
+    @Override
+    public void deleteByCode(String code) {
+        personRepository.deleteByCode(code);
+    }
 }

@@ -92,6 +92,7 @@ public class BindServiceImpl implements IBindService {
         carServiceLinkAutoRepository.deleteByAutomobileAndCarService(automobile, carService);
     }
 
+    @Transactional
     @Override
     public void bindPassportToPerson(String passportUIN, String personCode) {
         Person person = personService.getByCode(personCode);
@@ -100,6 +101,7 @@ public class BindServiceImpl implements IBindService {
         passportRepository.save(passport);
     }
 
+    @Transactional
     @Override
     public void unbindPassportFromPerson(String passportUIN) {
         Passport passport = passportService.getByUIN(passportUIN);

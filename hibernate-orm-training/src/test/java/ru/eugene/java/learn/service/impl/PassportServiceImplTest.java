@@ -28,4 +28,9 @@ public class PassportServiceImplTest {
         Passport passport = passportService.getByUIN("uin-120845-kosinov-0875");
         assertNotNull(passport);
     }
+
+    @Test
+    public void testDeleteByUIN(){
+        passportService.deleteByUin("uin-120845-kosinov-0875");
+    }
 }

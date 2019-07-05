@@ -28,4 +28,9 @@ public class PersonServiceImplTest {
         Person person = personService.getByCode("code_14");
         assertNotNull(person);
     }
+
+    @Test
+    public void testDeleteByCode(){
+        personService.deleteByCode("code_14");
+    }
 }

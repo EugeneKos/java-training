@@ -13,4 +13,6 @@ public interface PersonRepository extends CrudRepository<Person, Long> {
 
     @Query("select p from Person p join fetch p.banks where p.code = :code")
     Person findByCodeFetchBanks(@Param("code") String code);
+
+    void deleteByCode(String code);
 }

@@ -6,4 +6,6 @@ public interface IPassportService {
     Passport create(String uin);
     Passport getById(Long id);
     Passport getByUIN(String uin);
+
+    void deleteByUin(String uin);
 }
