@@ -10,6 +10,13 @@ public class CommonResource {
         num++;
     }
 
+    public void decrement(){
+        if(num == 0){
+            throw new UnsupportedOperationException("decrement operation impossible num = " + num);
+        }
+        num--;
+    }
+
     public int getNum() {
         return num;
     }
