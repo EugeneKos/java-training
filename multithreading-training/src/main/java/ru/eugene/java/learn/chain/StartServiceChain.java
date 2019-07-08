@@ -10,9 +10,10 @@ public abstract class StartServiceChain {
     public abstract void startService(Argument argument);
 
     void next(Argument argument){
-        if(next != null){
-            next.startService(argument);
+        if(next == null){
+            System.out.println("chain of end");
+            return;
         }
-        System.out.println("chain of end");
+        next.startService(argument);
     }
 }
