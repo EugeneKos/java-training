@@ -11,8 +11,9 @@
     <modules>
         <module>spring-training</module>
         <module>pattern-training</module>
-        <module>security</module>
         <module>hibernate-orm-training</module>
+        <module>multithreading-training</module>
+        <module>applications</module>
     </modules>
 
 
