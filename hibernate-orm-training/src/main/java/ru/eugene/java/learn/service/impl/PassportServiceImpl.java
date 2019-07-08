@@ -1,6 +1,7 @@
 package ru.eugene.java.learn.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.eugene.java.learn.data.Passport;
@@ -9,7 +10,7 @@ import ru.eugene.java.learn.exception.NotFoundException;
 import ru.eugene.java.learn.exception.ValidateException;
 import ru.eugene.java.learn.repository.PassportRepository;
 import ru.eugene.java.learn.service.IPassportService;
-import ru.eugene.java.learn.validate.impl.PassportValidator;
+import ru.eugene.java.learn.validate.impl.passport.PassportValidator;
 
 @Service
 public class PassportServiceImpl implements IPassportService {
@@ -17,7 +18,8 @@ public class PassportServiceImpl implements IPassportService {
     private PassportValidator passportValidator;
 
     @Autowired
-    public PassportServiceImpl(PassportRepository passportRepository, PassportValidator passportValidator) {
+    public PassportServiceImpl(PassportRepository passportRepository,
+                               @Qualifier("simplePassportValidator") PassportValidator passportValidator) {
         this.passportRepository = passportRepository;
         this.passportValidator = passportValidator;
     }

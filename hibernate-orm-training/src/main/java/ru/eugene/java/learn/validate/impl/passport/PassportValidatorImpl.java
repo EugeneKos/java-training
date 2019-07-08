@@ -1,12 +1,12 @@
-package ru.eugene.java.learn.validate.impl;
+package ru.eugene.java.learn.validate.impl.passport;
 
 import org.springframework.stereotype.Service;
 import ru.eugene.java.learn.data.Passport;
 import ru.eugene.java.learn.exception.ValidateException;
-import ru.eugene.java.learn.validate.AbstractValidator;
 
 @Service
-public class PassportValidator implements AbstractValidator<Passport> {
+@Deprecated
+public class PassportValidatorImpl implements PassportValidator {
     @Override
     public void validate(Passport passport) throws ValidateException {
         String uin = passport.getUin();

@@ -3,16 +3,19 @@ package ru.eugene.java.learn.validate.impl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ru.eugene.java.learn.context.TestSpringConfiguration;
 import ru.eugene.java.learn.data.Passport;
 import ru.eugene.java.learn.exception.ValidateException;
+import ru.eugene.java.learn.validate.impl.passport.PassportValidator;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {TestSpringConfiguration.class})
 public class PassportValidatorTest {
     @Autowired
+    @Qualifier("simplePassportValidator")
     private PassportValidator passportValidator;
 
     private Passport createPassport(String uin){
