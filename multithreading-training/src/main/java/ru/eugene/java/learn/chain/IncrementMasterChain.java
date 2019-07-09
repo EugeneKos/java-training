@@ -1,11 +1,11 @@
 package ru.eugene.java.learn.chain;
 
-import ru.eugene.java.learn.service.ThreadService;
+import ru.eugene.java.learn.service.IncrementMasterService;
 
-public class IncrementMasterChain extends StartServiceChain {
-    private ThreadService service;
+public class IncrementMasterChain extends ServiceChain {
+    private IncrementMasterService service;
 
-    public IncrementMasterChain(StartServiceChain next, ThreadService service) {
+    public IncrementMasterChain(ServiceChain next, IncrementMasterService service) {
         super(next);
         this.service = service;
     }

@@ -1,17 +1,15 @@
-package ru.eugene.java.learn.service.impl;
+package ru.eugene.java.learn.service;
 
 import ru.eugene.java.learn.common.CommonResource;
-import ru.eugene.java.learn.service.ThreadService;
 import ru.eugene.java.learn.thread.IncrementMaster;
 
-public class IncrementMasterService implements ThreadService {
+public class IncrementMasterService {
     private final boolean syncFlag;
 
     public IncrementMasterService(boolean syncFlag) {
         this.syncFlag = syncFlag;
     }
 
-    @Override
     public void doIt(){
         System.out.println(Thread.currentThread().getName() + " start work");
 

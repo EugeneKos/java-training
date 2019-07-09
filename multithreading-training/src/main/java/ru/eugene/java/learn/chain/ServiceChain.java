@@ -1,9 +1,9 @@
 package ru.eugene.java.learn.chain;
 
-public abstract class StartServiceChain {
-    private StartServiceChain next;
+public abstract class ServiceChain {
+    private ServiceChain next;
 
-    public StartServiceChain(StartServiceChain next) {
+    public ServiceChain(ServiceChain next) {
         this.next = next;
     }
 

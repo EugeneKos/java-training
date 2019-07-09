@@ -1,11 +1,11 @@
 package ru.eugene.java.learn.chain;
 
-import ru.eugene.java.learn.service.ThreadService;
+import ru.eugene.java.learn.service.FillPullService;
 
-public class FillPullChain extends StartServiceChain {
-    private ThreadService service;
+public class FillPullChain extends ServiceChain {
+    private FillPullService service;
 
-    public FillPullChain(StartServiceChain next, ThreadService service) {
+    public FillPullChain(ServiceChain next, FillPullService service) {
         super(next);
         this.service = service;
     }

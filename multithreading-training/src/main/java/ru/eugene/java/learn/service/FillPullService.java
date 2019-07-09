@@ -1,13 +1,11 @@
-package ru.eugene.java.learn.service.impl;
+package ru.eugene.java.learn.service;
 
 import ru.eugene.java.learn.common.CommonResource;
 import ru.eugene.java.learn.common.Counter;
-import ru.eugene.java.learn.service.ThreadService;
 import ru.eugene.java.learn.thread.Filling;
 import ru.eugene.java.learn.thread.Pulling;
 
-public class FillPullService implements ThreadService {
-    @Override
+public class FillPullService {
     public void doIt(){
         CommonResource commonResource = new CommonResource();
         Counter counter = new Counter(1000);
