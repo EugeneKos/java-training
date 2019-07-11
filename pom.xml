@@ -14,6 +14,7 @@
         <module>hibernate-orm-training</module>
         <module>multithreading-training</module>
         <module>applications</module>
+        <module>reflection-api-training</module>
     </modules>
 
 
