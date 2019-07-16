@@ -4,7 +4,6 @@ public class ComputerModel {
     private String fullName;
     private double frequency;
     private int memorySize;
-    public int aaa;
 
     public ComputerModel(String fullName, double frequency, int memorySize) {
         this.fullName = fullName;

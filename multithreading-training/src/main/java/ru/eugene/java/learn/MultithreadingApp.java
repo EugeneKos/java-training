@@ -7,7 +7,7 @@ import ru.eugene.java.learn.chain.ServiceChain;
 import ru.eugene.java.learn.service.FillPullService;
 import ru.eugene.java.learn.service.IncrementMasterService;
 
-public class App {
+public class MultithreadingApp {
     public static void main(String[] args) {
         start(Argument.WN);
     }
