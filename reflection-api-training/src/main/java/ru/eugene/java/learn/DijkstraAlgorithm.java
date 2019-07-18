@@ -1,19 +1,21 @@
 package ru.eugene.java.learn;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class DijkstraAlgorithm {
     public static void main(String[] args) {
         int[][] graph = {
-                {0, 3, 16, -1, -1, -1},
+                {0, 3, 4, -1, -1, -1},
                 {3, 0, -1, 5, -1, -1},
-                {16, -1, 0, 7, 10, -1},
-                {-1, 5, 7, 0, 5, 8},
-                {-1, -1, 10, 5, 0, 4},
+                {4, -1, 0, 7, 10, -1},
+                {-1, 5, 7, 0, 2, 8},
+                {-1, -1, 10, 2, 0, 4},
                 {-1, -1, -1, 8, 4, 0},
         };
 
-        int shortestPath = dijkstra(graph, 0, 2);
+        int shortestPath = dijkstra(graph, 0, 5);
         System.out.println("shortest path: " + shortestPath);
     }
 
@@ -22,17 +24,22 @@ public class DijkstraAlgorithm {
             return -2;
         }
         int[] path = initPath(begin, graph.length);
+        List<Integer>[] history = initHistoryPath(graph.length);
 
         for (int i = 0; i < graph.length; i++) {
             for (int j = 0; j < graph.length; j++) {
                 if(graph[i][j] != 0 && graph[i][j] != -1){
                     if (path[i] + graph[i][j] < path[j]){
                         path[j] = path[i] + graph[i][j];
+                        history[j] = new ArrayList<>();
+                        history[j].addAll(history[i]);
+                        history[j].add(j);
                     }
                 }
             }
         }
-        System.out.println("path: " + Arrays.toString(path));
+        System.out.println("path length: " + Arrays.toString(path));
+        System.out.println("path : " + history[finish]);
 
         return path[finish];
     }
@@ -50,5 +57,16 @@ public class DijkstraAlgorithm {
         }
 
         return path;
+    }
+
+    private static List<Integer>[] initHistoryPath(int length){
+        List<Integer>[] history = new List[length];
+        for (int i = 0; i < length; i++) {
+            history[i] = new ArrayList<>();
+            if(i == 0){
+                history[i].add(0);
+            }
+        }
+        return history;
     }
 }
