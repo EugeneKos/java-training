@@ -1,4 +1,4 @@
-package ru.eugene.java.learn;
+package ru.eugene.java.learn.dijkstra;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -63,9 +63,9 @@ public class DijkstraAlgorithm {
         List<Integer>[] history = new List[length];
         for (int i = 0; i < length; i++) {
             history[i] = new ArrayList<>();
-            if(i == 0){
-                history[i].add(0);
-            }
+            //if(i == 0){
+                history[i].add(i);
+            //}
         }
         return history;
     }
