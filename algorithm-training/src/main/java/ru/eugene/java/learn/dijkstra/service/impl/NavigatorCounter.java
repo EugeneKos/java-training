@@ -12,41 +12,46 @@ import java.util.Set;
 
 public class NavigatorCounter extends AbstractNavigator {
     private Set<City> visitedCity = new HashSet<>();
-    private List<Roadway> unconsideredRoadways = new ArrayList<>();
+    private Set<City> unvisitedCity = new HashSet<>();
 
     @Override
     public List<City> getShortestPath(City from, City to) {
-        unconsideredRoadways.addAll(DijkstraUtils.getRoadwaysByFromCity(roadways, from));
-        while (!unconsideredRoadways.isEmpty()) {
-            Roadway shortestRoadway = getShortestRoadway(unconsideredRoadways);
-            unconsideredRoadways.remove(shortestRoadway);
-            City fromCity = shortestRoadway.getFromCity();
-            City toCity = shortestRoadway.getToCity();
-            if(!visitedCity.contains(toCity)){
-                int fullDistance = fromCity.getDistance() + shortestRoadway.getDistance();
-                if(fullDistance < toCity.getDistance()){
-                    toCity.setDistance(fullDistance);
-                    List<City> path = new ArrayList<>(fromCity.getPath());
-                    path.add(toCity);
-                    toCity.setPath(path);
-                }
-                unconsideredRoadways.addAll(DijkstraUtils.getRoadwaysByFromCity(roadways, toCity));
-            }
-            visitedCity.add(fromCity);
+        unvisitedCity.add(from);
+        while (!unvisitedCity.isEmpty()){
+            City current = getShortestDistanceCity(unvisitedCity);
+            unvisitedCity.remove(current);
+            List<Roadway> roadways = DijkstraUtils.getRoadwaysByFromCity(super.roadways, current);
+            roadways.forEach(this::calculateRoadway);
+            visitedCity.add(current);
         }
         return to.getPath();
     }
 
-    private Roadway getShortestRoadway(List<Roadway> roadways) {
-        Roadway shortestRoadway = null;
-        int minDistance = Integer.MAX_VALUE;
-        for (Roadway roadway : roadways) {
-            int distance = roadway.getDistance();
-            if (distance < minDistance) {
-                minDistance = distance;
-                shortestRoadway = roadway;
+    private void calculateRoadway(Roadway roadway){
+        City fromCity = roadway.getFromCity();
+        City toCity = roadway.getToCity();
+        if(visitedCity.contains(toCity)){
+            return;
+        }
+        int distance = fromCity.getDistance() + roadway.getDistance();
+        if(distance < toCity.getDistance()){
+            toCity.setDistance(distance);
+            List<City> path = new ArrayList<>(fromCity.getPath());
+            path.add(toCity);
+            toCity.setPath(path);
+        }
+        unvisitedCity.add(toCity);
+    }
+
+    private City getShortestDistanceCity(Set<City> cities){
+        City shortestDistanceCity = null;
+        int shortestDistance = Integer.MAX_VALUE;
+        for (City city : cities){
+            if(city.getDistance() < shortestDistance){
+                shortestDistance = city.getDistance();
+                shortestDistanceCity = city;
             }
         }
-        return shortestRoadway;
+        return shortestDistanceCity;
     }
 }
