@@ -15,6 +15,8 @@
         <module>multithreading-training</module>
         <module>applications</module>
         <module>reflection-api-training</module>
+        <module>other-training</module>
+        <module>algorithm-training</module>
     </modules>
 
 
