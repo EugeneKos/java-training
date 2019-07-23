@@ -29,6 +29,9 @@ public class NavigatorCounter extends AbstractNavigator {
     private void calculateRoadway(Roadway roadway){
         City fromCity = roadway.getFromCity();
         City toCity = roadway.getToCity();
+        if(roadway.getDistance() < 0){
+            throw new IllegalArgumentException("Negative routes are not allowed !");
+        }
         int distance = fromCity.getDistance() + roadway.getDistance();
         if(distance < toCity.getDistance()){
             toCity.setDistance(distance);
