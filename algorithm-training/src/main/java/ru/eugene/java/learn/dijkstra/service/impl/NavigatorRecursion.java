@@ -11,6 +11,7 @@ import java.util.List;
 public class NavigatorRecursion extends AbstractNavigator {
     @Override
     public List<City> getShortestPath(City from, City to){
+        from.setDistance(0);
         calculateRoadwaysForCity(from);
         return to.getPath();
     }

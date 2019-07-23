@@ -11,18 +11,17 @@ import java.util.List;
 import java.util.Set;
 
 public class NavigatorCounter extends AbstractNavigator {
-    private Set<City> visitedCity = new HashSet<>();
     private Set<City> unvisitedCity = new HashSet<>();
 
     @Override
     public List<City> getShortestPath(City from, City to) {
+        from.setDistance(0);
         unvisitedCity.add(from);
         while (!unvisitedCity.isEmpty()){
             City current = getShortestDistanceCity(unvisitedCity);
             unvisitedCity.remove(current);
             List<Roadway> roadways = DijkstraUtils.getRoadwaysByFromCity(super.roadways, current);
             roadways.forEach(this::calculateRoadway);
-            visitedCity.add(current);
         }
         return to.getPath();
     }
@@ -30,17 +29,14 @@ public class NavigatorCounter extends AbstractNavigator {
     private void calculateRoadway(Roadway roadway){
         City fromCity = roadway.getFromCity();
         City toCity = roadway.getToCity();
-        if(visitedCity.contains(toCity)){
-            return;
-        }
         int distance = fromCity.getDistance() + roadway.getDistance();
         if(distance < toCity.getDistance()){
             toCity.setDistance(distance);
             List<City> path = new ArrayList<>(fromCity.getPath());
             path.add(toCity);
             toCity.setPath(path);
+            unvisitedCity.add(toCity);
         }
-        unvisitedCity.add(toCity);
     }
 
     private City getShortestDistanceCity(Set<City> cities){

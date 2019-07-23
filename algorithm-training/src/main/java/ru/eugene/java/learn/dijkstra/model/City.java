@@ -10,9 +10,9 @@ public class City {
 
     private List<City> path;
 
-    public City(String name, int distance) {
+    public City(String name) {
         this.name = name;
-        this.distance = distance;
+        this.distance = Integer.MAX_VALUE;
         this.path = new ArrayList<>();
         this.path.add(this);
     }
