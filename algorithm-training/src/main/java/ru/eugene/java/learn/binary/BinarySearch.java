@@ -1,6 +1,13 @@
 package ru.eugene.java.learn.binary;
 
 public class BinarySearch {
+    /**
+     * Алгоритм бинарного поиска элемента в массиве.
+     *
+     * @param mas sours massive
+     * @param value value to find
+     * @return position of the desired value or -1 if not found
+     */
     public int binarySearch(int[] mas, int value){
         int min = 0;
         int max = mas.length - 1;
