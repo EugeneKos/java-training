@@ -6,4 +6,6 @@ public interface Sorter {
     int[] selectionSort(int[] array);
 
     List<Integer> selectionSort(List<Integer> list);
+
+    int[] bubblySort(int[] array);
 }

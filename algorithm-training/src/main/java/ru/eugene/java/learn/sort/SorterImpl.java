@@ -68,4 +68,25 @@ public class SorterImpl implements Sorter {
         }
         return index;
     }
+
+    /**
+     * Сортировка массива пузырьковым методом.
+     *
+     * @param array sours array
+     * @return sorted array
+     */
+    @Override
+    public int[] bubblySort(int[] array) {
+        for (int i = 0; i < array.length - 1; i++) {
+            for (int j = 0; j < array.length - 1; j++) {
+                int current = array[j];
+                int next = array[j + 1];
+                if(next < current){
+                    array[j] = next;
+                    array[j + 1] = current;
+                }
+            }
+        }
+        return array;
+    }
 }

@@ -37,4 +37,15 @@ public class SorterTest {
                 Arrays.asList(1, 1, 2, 5, 10, 23, 45, 77, 98),
                 sortedList);
     }
+
+    @Test
+    public void testBubblySort(){
+        int[] array = {45, 23, 1, 77, 10, 5, 98, 2, 1};
+        int[] sorted = sorter.bubblySort(array);
+        System.out.println("Bubbly sorted array: " + Arrays.toString(sorted));
+
+        Assert.assertArrayEquals("compare arrays",
+                new int[]{1, 1, 2, 5, 10, 23, 45, 77, 98},
+                sorted);
+    }
 }
