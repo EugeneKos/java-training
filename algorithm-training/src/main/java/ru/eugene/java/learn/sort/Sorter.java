@@ -8,4 +8,6 @@ public interface Sorter {
     List<Integer> selectionSort(List<Integer> list);
 
     int[] bubblySort(int[] array);
+
+    int[] quickSort(int[] array);
 }

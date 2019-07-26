@@ -89,4 +89,28 @@ public class SorterImpl implements Sorter {
         }
         return array;
     }
+
+    @Override
+    public int[] quickSort(int[] array) {
+        if(array.length <= 1){
+            return array;
+        }
+
+        int indexMinValue = findIndexMinValueOnArray(array);
+
+        int[] leftSize = Arrays.copyOfRange(array, 0, indexMinValue);
+        int[] rightSize = Arrays.copyOfRange(array, indexMinValue + 1, array.length);
+
+        int[] newArray = new int[array.length - 1];
+        System.arraycopy(leftSize, 0, newArray, 0, leftSize.length);
+        System.arraycopy(rightSize, 0, newArray, leftSize.length, rightSize.length);
+
+        int[] result = new int[array.length];
+        result[0] = array[indexMinValue];
+
+        newArray = quickSort(newArray);
+        System.arraycopy(newArray, 0, result, 1, newArray.length);
+
+        return result;
+    }
 }
