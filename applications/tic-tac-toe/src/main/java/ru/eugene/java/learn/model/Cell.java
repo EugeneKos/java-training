@@ -3,20 +3,20 @@ package ru.eugene.java.learn.model;
 import java.util.Objects;
 
 public class Cell {
-    private int x;
-    private int y;
+    private int coordinateX;
+    private int coordinateY;
 
-    public Cell(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public Cell(int coordinateX, int coordinateY) {
+        this.coordinateX = coordinateX;
+        this.coordinateY = coordinateY;
     }
 
-    public int getX() {
-        return x;
+    public int getCoordinateX() {
+        return coordinateX;
     }
 
-    public int getY() {
-        return y;
+    public int getCoordinateY() {
+        return coordinateY;
     }
 
     @Override
@@ -24,12 +24,12 @@ public class Cell {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cell cell = (Cell) o;
-        return x == cell.x &&
-                y == cell.y;
+        return coordinateX == cell.coordinateX &&
+                coordinateY == cell.coordinateY;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(x, y);
+        return Objects.hash(coordinateX, coordinateY);
     }
 }
