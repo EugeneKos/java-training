@@ -6,6 +6,4 @@ import ru.eugene.java.learn.model.State;
 
 public interface GameService {
     State getStatePlayingField(Cell cell, Player player);
-
-    void printPlayingField();
 }
