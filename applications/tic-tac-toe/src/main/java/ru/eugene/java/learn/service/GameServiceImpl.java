@@ -14,7 +14,7 @@ public class GameServiceImpl implements GameService {
     private Map<Cell, Player> field = new HashMap<>();
 
     public GameServiceImpl(int fieldSize, int numChipWin) {
-        if(fieldSize < 3 || numChipWin > fieldSize){
+        if(fieldSize < 3 || numChipWin > fieldSize || numChipWin < 3){
             throw new RuntimeException("ERROR-1");
         }
         this.fieldSize = fieldSize;
@@ -26,13 +26,15 @@ public class GameServiceImpl implements GameService {
         if(!addPlayerOnCell(cell, player)){
             return State.ERROR;
         }
-        if(checkRow(cell, player)){
+        if(isRowWin(cell, player)){
             return State.WIN;
         }
-        if(checkColumn(cell, player)){
+        if(isColumnWin(cell, player)){
             return State.WIN;
         }
-
+        if(isDiagonalsWin(cell, player)){
+            return State.WIN;
+        }
         return getDrawOrNotFinish();
     }
 
@@ -57,61 +59,97 @@ public class GameServiceImpl implements GameService {
         return State.NOT_FINISH;
     }
 
-    private boolean checkRow(Cell cell, Player player){
+    private boolean isRowWin(Cell cell, Player player){
         int coordinateX = cell.getCoordinateX();
         int coordinateY = cell.getCoordinateY();
-        int count = 0;
-        for (int i = 0; i < numChipWin; i++) {
-            coordinateX++;
-            if(coordinateX >= fieldSize){
-                break;
-            }
-            count = counter(count, coordinateX, coordinateY, player);
-        }
-        for (int i = 0; i < numChipWin; i++) {
-            coordinateX--;
-            if(coordinateX < 0){
-                break;
-            }
-            count = counter(count, coordinateX, coordinateY, player);
-        }
-        return count >= numChipWin;
+        int numSameChips = 1;
+
+        numSameChips = calculateSameChips(numSameChips, coordinateX, coordinateY,
+                player, x -> ++x, y -> y);
+        numSameChips = calculateSameChips(numSameChips, coordinateX, coordinateY,
+                player, x -> --x, y -> y);
+
+        return numSameChips >= numChipWin;
     }
 
-    private boolean checkColumn(Cell cell, Player player){
+    private boolean isColumnWin(Cell cell, Player player){
         int coordinateX = cell.getCoordinateX();
         int coordinateY = cell.getCoordinateY();
-        int count = 0;
+        int numSameChips = 1;
+
+        numSameChips = calculateSameChips(numSameChips, coordinateX, coordinateY,
+                player, x -> x, y -> ++y);
+        numSameChips = calculateSameChips(numSameChips, coordinateX, coordinateY,
+                player, x -> x, y -> --y);
+
+        return numSameChips >= numChipWin;
+    }
+
+    private boolean isDiagonalsWin(Cell cell, Player player){
+        int coordinateX = cell.getCoordinateX();
+        int coordinateY = cell.getCoordinateY();
+        int numSameChips = 1;
+
+        numSameChips = calculateSameChips(numSameChips, coordinateX, coordinateY,
+                player, x -> ++x, y -> --y);
+        numSameChips = calculateSameChips(numSameChips, coordinateX, coordinateY,
+                player, x -> --x, y -> ++y);
+
+        if(numSameChips >= numChipWin){
+            return true;
+        }
+
+        numSameChips = 1;
+        numSameChips = calculateSameChips(numSameChips, coordinateX, coordinateY,
+                player, x -> ++x, y -> ++y);
+        numSameChips = calculateSameChips(numSameChips, coordinateX, coordinateY,
+                player, x -> --x, y -> --y);
+
+        return numSameChips >= numChipWin;
+    }
+
+    private int calculateSameChips(int numSameChips, int coordinateX, int coordinateY,
+                                   Player player, CoordinateOperation operationX,
+                                   CoordinateOperation operationY){
+
         for (int i = 0; i < numChipWin; i++) {
-            coordinateY++;
-            if(coordinateY >= fieldSize){
-                break;
+            coordinateX = operationX.operation(coordinateX);
+            coordinateY = operationY.operation(coordinateY);
+            if(coordinateX < 0 || coordinateX >= fieldSize){
+                return numSameChips;
             }
-            count = counter(count, coordinateX, coordinateY, player);
-        }
-        for (int i = 0; i < numChipWin; i++) {
-            coordinateY--;
-            if(coordinateY < 0){
-                break;
+            if(coordinateY < 0 || coordinateY >= fieldSize){
+                return numSameChips;
             }
-            count = counter(count, coordinateX, coordinateY, player);
+            Player nextPlayer = field.get(new Cell(coordinateX, coordinateY));
+            if(nextPlayer == null){
+                return numSameChips;
+            }
+            if(player == nextPlayer){
+                numSameChips++;
+            }
         }
-        return count >= numChipWin;
+
+        return numSameChips;
     }
 
-    private int counter(int count, int coordinateX, int coordinateY, Player player){
-        Player nextPlayer = field.get(new Cell(coordinateX, coordinateY));
-        if(nextPlayer == null){
-            return count;
+    @Override
+    public void printPlayingField() {
+        for (int i = 0; i < fieldSize; i++) {
+            for (int j = 0; j < fieldSize; j++) {
+                Player player = field.get(new Cell(j, i));
+                if(player != null){
+                    System.out.print(player + "|");
+                } else {
+                    System.out.print("_|");
+                }
+            }
+            System.out.println();
         }
-        if(player == nextPlayer){
-            count++;
-        }
-        return count;
     }
 
-    private boolean checkDiagonals(Cell cell){
-        return false;
+    @FunctionalInterface
+    private interface CoordinateOperation{
+        int operation(int coordinate);
     }
-
 }
