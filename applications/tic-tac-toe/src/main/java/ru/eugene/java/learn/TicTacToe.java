@@ -12,6 +12,10 @@ import java.io.InputStreamReader;
 
 public class TicTacToe {
     public static void main(String[] args) {
+        startTicTacToe();
+    }
+
+    private static void startTicTacToe(){
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
         int fieldSize = getIntFromString(bufferedReader,
@@ -21,30 +25,19 @@ public class TicTacToe {
 
         GameService gameService = new GameServiceImpl(fieldSize, numChipWin);
         State state = State.NOT_FINISH;
-        boolean moveX = true;
+        Player currentPlayer = Player.X;
+
         while (state == State.NOT_FINISH || state == State.ERROR) {
-            System.out.println("Ход: " + (moveX ? "X" : "O"));
+            System.out.println("Ход: " + currentPlayer);
             int x = getIntFromString(bufferedReader, "Введите координату клетки по оси x: ");
             int y = getIntFromString(bufferedReader, "Введите координату клетки по оси y: ");
-            if (moveX) {
-                state = gameService.getStatePlayingField(new Cell(x, y), Player.X);
-                if (state != State.ERROR) {
-                    moveX = false;
-                } else {
-                    System.out.println("Клетка с данными параметрами не существует или уже заполнена!");
-                }
-            } else {
-                state = gameService.getStatePlayingField(new Cell(x, y), Player.O);
-                if (state != State.ERROR) {
-                    moveX = true;
-                } else {
-                    System.out.println("Клетка с данными параметрами не существует или уже заполнена!");
-                }
-            }
+            state = gameService.getStatePlayingField(new Cell(x, y), currentPlayer);
+            currentPlayer = changePlayer(state, currentPlayer);
             gameService.printPlayingField();
         }
+
         if (state == State.WIN) {
-            System.out.println("Победитель игры: " + (!moveX ? "X" : "O"));
+            System.out.println("Победитель игры: " + currentPlayer);
         } else {
             System.out.println("Ничья !!!");
         }
@@ -62,5 +55,22 @@ public class TicTacToe {
                 System.out.println("Ошибка ввода");
             }
         }
+    }
+
+    private static Player changePlayer(State state, Player current){
+        if(state == State.WIN){
+            return current;
+        }
+        if(state != State.ERROR){
+            if(current == Player.X){
+                return Player.O;
+            }
+            if(current == Player.O){
+                return Player.X;
+            }
+        } else {
+            System.out.println("Клетка с данными параметрами не существует или уже заполнена!");
+        }
+        return current;
     }
 }
