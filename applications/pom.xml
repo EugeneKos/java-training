@@ -15,6 +15,7 @@
 
     <modules>
         <module>security</module>
+        <module>tic-tac-toe</module>
     </modules>
 
 </project>
