@@ -1,10 +1,10 @@
-package ru.eugene.java.learn.dijkstra.service;
+package ru.eugene.java.learn.graphs.dijkstra.service;
 
 import org.junit.Assert;
 import org.junit.Test;
-import ru.eugene.java.learn.dijkstra.model.City;
-import ru.eugene.java.learn.dijkstra.service.impl.NavigatorCounter;
-import ru.eugene.java.learn.dijkstra.service.impl.NavigatorRecursion;
+import ru.eugene.java.learn.graphs.dijkstra.model.City;
+import ru.eugene.java.learn.graphs.dijkstra.service.impl.NavigatorCounter;
+import ru.eugene.java.learn.graphs.dijkstra.service.impl.NavigatorRecursion;
 
 import java.util.List;
 

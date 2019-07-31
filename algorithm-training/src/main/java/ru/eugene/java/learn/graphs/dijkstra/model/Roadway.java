@@ -1,4 +1,4 @@
-package ru.eugene.java.learn.dijkstra.model;
+package ru.eugene.java.learn.graphs.dijkstra.model;
 
 public class Roadway {
     private City fromCity;

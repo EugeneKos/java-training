@@ -1,6 +1,6 @@
-package ru.eugene.java.learn.dijkstra.service;
+package ru.eugene.java.learn.graphs.dijkstra.service;
 
-import ru.eugene.java.learn.dijkstra.model.City;
+import ru.eugene.java.learn.graphs.dijkstra.model.City;
 
 import java.util.List;
 

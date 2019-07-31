@@ -1,7 +1,7 @@
-package ru.eugene.java.learn.dijkstra.service.impl;
+package ru.eugene.java.learn.graphs.dijkstra.service.impl;
 
 import org.junit.Test;
-import ru.eugene.java.learn.dijkstra.service.Dijkstra;
+import ru.eugene.java.learn.graphs.dijkstra.service.Dijkstra;
 
 import static org.junit.Assert.*;
 

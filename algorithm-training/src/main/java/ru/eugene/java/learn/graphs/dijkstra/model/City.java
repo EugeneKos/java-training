@@ -1,4 +1,4 @@
-package ru.eugene.java.learn.dijkstra.model;
+package ru.eugene.java.learn.graphs.dijkstra.model;
 
 import java.util.ArrayList;
 import java.util.List;

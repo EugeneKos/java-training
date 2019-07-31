@@ -1,9 +1,9 @@
-package ru.eugene.java.learn.dijkstra.service.impl;
+package ru.eugene.java.learn.graphs.dijkstra.service.impl;
 
-import ru.eugene.java.learn.dijkstra.model.City;
-import ru.eugene.java.learn.dijkstra.model.Roadway;
-import ru.eugene.java.learn.dijkstra.service.AbstractNavigator;
-import ru.eugene.java.learn.dijkstra.util.DijkstraUtils;
+import ru.eugene.java.learn.graphs.dijkstra.model.City;
+import ru.eugene.java.learn.graphs.dijkstra.model.Roadway;
+import ru.eugene.java.learn.graphs.dijkstra.service.AbstractNavigator;
+import ru.eugene.java.learn.graphs.dijkstra.util.DijkstraUtils;
 
 import java.util.ArrayList;
 import java.util.List;
