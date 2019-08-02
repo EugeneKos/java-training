@@ -69,7 +69,7 @@ public class TicTacToe {
                 return Player.X;
             }
         } else {
-            System.out.println("Клетка с данными параметрами не существует или уже заполнена!");
+            System.out.println(state.getDescription());
         }
         return current;
     }
