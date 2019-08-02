@@ -3,6 +3,7 @@ package ru.eugene.java.learn.service;
 import ru.eugene.java.learn.model.Cell;
 import ru.eugene.java.learn.model.Player;
 import ru.eugene.java.learn.model.State;
+import ru.eugene.java.learn.util.NumberUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -140,7 +141,13 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public void printPlayingField() {
+        System.out.print("_|");
         for (int i = 0; i < fieldSize; i++) {
+            System.out.print(NumberUtils.handleNumber(i) + "|");
+        }
+        System.out.println();
+        for (int i = 0; i < fieldSize; i++) {
+            System.out.print(NumberUtils.handleNumber(i) + "|");
             for (int j = 0; j < fieldSize; j++) {
                 Player player = field.get(new Cell(j, i));
                 if(player != null){
