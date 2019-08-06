@@ -1,6 +1,8 @@
 package ru.eugene.java.learn.graphs.search.wide;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class SearchWideServiceImpl implements SearchWideService {
@@ -25,10 +27,15 @@ public class SearchWideServiceImpl implements SearchWideService {
                 continue;
             }
             for (Vertex neighbor : current.getNeighbors()){
+                List<Vertex> path = new ArrayList<>(current.getPath());
+                path.add(neighbor);
+                neighbor.setPath(path);
                 if(neighbor.equals(finalVertex)){
                     return true;
                 } else {
-                    queue.add(neighbor);
+                    if(!queue.contains(neighbor)){
+                        queue.add(neighbor);
+                    }
                 }
             }
         }
