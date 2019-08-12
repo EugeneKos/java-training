@@ -3,6 +3,7 @@ package ru.eugene.java.learn.service;
 import ru.eugene.java.learn.model.Cell;
 import ru.eugene.java.learn.model.Player;
 import ru.eugene.java.learn.model.State;
+import ru.eugene.java.learn.util.NumberUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,8 +24,9 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public State getStatePlayingField(Cell cell, Player player) {
-        if(!addPlayerOnCell(cell, player)){
-            return State.ERROR;
+        State stateAdd = addPlayerOnCell(cell, player);
+        if(stateAdd != null){
+            return stateAdd;
         }
         if(isRowWin(cell, player)){
             return State.WIN;
@@ -38,18 +40,22 @@ public class GameServiceImpl implements GameService {
         return getDrawOrNotFinish();
     }
 
-    private boolean addPlayerOnCell(Cell cell, Player player){
+    private State addPlayerOnCell(Cell cell, Player player){
+        State state = State.ERROR;
         if(cell.getCoordinateX() < 0 || cell.getCoordinateX() >= fieldSize){
-            return false;
+            state.setDescription("Координата по оси x меньше 0 или больше " + fieldSize);
+            return state;
         }
         if(cell.getCoordinateY() < 0 || cell.getCoordinateY() >= fieldSize){
-            return false;
+            state.setDescription("Координата по оси y меньше 0 или больше " + fieldSize);
+            return state;
         }
         if(field.containsKey(cell)){
-            return false;
+            state.setDescription("Клетка с данными координатами занята!");
+            return state;
         }
         field.put(cell, player);
-        return true;
+        return null;
     }
 
     private State getDrawOrNotFinish(){
@@ -135,7 +141,13 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public void printPlayingField() {
+        System.out.print("_|");
         for (int i = 0; i < fieldSize; i++) {
+            System.out.print(NumberUtils.handleNumber(i) + "|");
+        }
+        System.out.println();
+        for (int i = 0; i < fieldSize; i++) {
+            System.out.print(NumberUtils.handleNumber(i) + "|");
             for (int j = 0; j < fieldSize; j++) {
                 Player player = field.get(new Cell(j, i));
                 if(player != null){
