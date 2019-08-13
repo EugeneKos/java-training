@@ -14,25 +14,16 @@ public class StationCoverageServiceImpl implements StationCoverageService {
             T bestStation = null;
             Set<E> statesCovered = new HashSet<>();
             for (Map.Entry<T, Set<E>> entry : stationCoverage.entrySet()){
-                Set<E> intersection = intersection(entry.getValue(), states);
+                Set<E> intersection = new HashSet<>(states);
+                intersection.retainAll(entry.getValue());
                 if(intersection.size() > statesCovered.size()){
                     bestStation = entry.getKey();
-                    statesCovered = new HashSet<>(intersection);
+                    statesCovered = intersection;
                 }
             }
             states.removeAll(statesCovered);
             stations.add(bestStation);
         }
         return stations;
-    }
-
-    private <T> Set<T> intersection(Set<T> one, Set<T> two){
-        Set<T> union = new HashSet<>();
-        for (T item : one){
-            if(two.contains(item)){
-                union.add(item);
-            }
-        }
-        return union;
     }
 }
