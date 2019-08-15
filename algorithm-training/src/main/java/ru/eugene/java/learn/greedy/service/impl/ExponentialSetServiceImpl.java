@@ -4,8 +4,6 @@ import ru.eugene.java.learn.greedy.service.ExponentialSetService;
 
 import java.util.Set;
 import java.util.HashSet;
-import java.util.List;
-import java.util.LinkedList;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -15,34 +13,27 @@ public class ExponentialSetServiceImpl<T> implements ExponentialSetService<T> {
         int bitDepth = set.size();
         int numSubsets = (int) Math.pow(2, bitDepth);
 
-        List<Set<T>> allSubsets = initialSubsets(numSubsets);
+        Set<Set<T>> allSubsets = new HashSet<>();
         Map<Integer, T> mapping = getMapping(set);
 
-        int count = 0;
-        for (Set<T> subset : allSubsets) {
-            int[] binaryRepresentation = binaryRepresentation(count, bitDepth);
-            fillingSubset(subset, mapping, binaryRepresentation);
-            count++;
+        for (int i = 0; i < numSubsets; i++) {
+            int[] binaryRepresentation = binaryRepresentation(i, bitDepth);
+            Set<T> subset = createSubset(mapping, binaryRepresentation);
+            allSubsets.add(subset);
         }
 
-        return new HashSet<>(allSubsets);
+        return allSubsets;
     }
 
-    private void fillingSubset(Set<T> subset, Map<Integer, T> mapping, int[] binaryRepresentation){
+    private Set<T> createSubset(Map<Integer, T> mapping, int[] binaryRepresentation){
+        Set<T> subset = new HashSet<>();
         for (int i = 0; i < binaryRepresentation.length; i++) {
             if(binaryRepresentation[i] == 1){
                 T item = mapping.get(i);
                 subset.add(item);
             }
         }
-    }
-
-    private List<Set<T>> initialSubsets(int size){
-        List<Set<T>> allSubsets = new LinkedList<>();
-        for (int i = 0; i < size; i++) {
-            allSubsets.add(new HashSet<>());
-        }
-        return allSubsets;
+        return subset;
     }
 
     private Map<Integer, T> getMapping(Set<T> set){
