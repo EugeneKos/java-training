@@ -1,4 +1,4 @@
-package ru.eugene.java.learn.greedy.service;
+package ru.eugene.java.learn.np;
 
 import java.util.Set;
 

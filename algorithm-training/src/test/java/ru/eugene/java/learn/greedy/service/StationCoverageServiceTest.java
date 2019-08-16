@@ -3,7 +3,7 @@ package ru.eugene.java.learn.greedy.service;
 import org.junit.Test;
 import ru.eugene.java.learn.greedy.model.Government;
 import ru.eugene.java.learn.greedy.model.RadioStation;
-import ru.eugene.java.learn.greedy.service.impl.ExponentialSetServiceImpl;
+import ru.eugene.java.learn.np.ExponentialSetServiceImpl;
 import ru.eugene.java.learn.greedy.service.impl.StationCoverageServiceGreedyImpl;
 import ru.eugene.java.learn.greedy.service.impl.StationCoverageServiceNPFullImpl;
 

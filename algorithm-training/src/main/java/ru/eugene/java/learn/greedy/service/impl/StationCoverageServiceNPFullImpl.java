@@ -2,7 +2,7 @@ package ru.eugene.java.learn.greedy.service.impl;
 
 import ru.eugene.java.learn.greedy.model.Government;
 import ru.eugene.java.learn.greedy.model.RadioStation;
-import ru.eugene.java.learn.greedy.service.ExponentialSetService;
+import ru.eugene.java.learn.np.ExponentialSetService;
 import ru.eugene.java.learn.greedy.service.StationCoverageService;
 
 import java.util.HashSet;

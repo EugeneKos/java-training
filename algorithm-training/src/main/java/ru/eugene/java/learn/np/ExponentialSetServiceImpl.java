@@ -1,6 +1,4 @@
-package ru.eugene.java.learn.greedy.service.impl;
-
-import ru.eugene.java.learn.greedy.service.ExponentialSetService;
+package ru.eugene.java.learn.np;
 
 import java.util.Set;
 import java.util.HashSet;
