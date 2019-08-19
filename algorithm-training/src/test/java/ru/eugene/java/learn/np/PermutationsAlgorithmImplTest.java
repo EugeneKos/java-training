@@ -12,7 +12,7 @@ public class PermutationsAlgorithmImplTest {
     public void findAllPermutationsTest(){
         Set<Integer> set = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        PermutationsAlgorithm permutationsAlgorithm = new PermutationsAlgorithmImpl();
+        PermutationsAlgorithm<Integer> permutationsAlgorithm = new PermutationsAlgorithmImpl<>();
 
         List<List<Integer>> lists = permutationsAlgorithm.findAllPermutations(set);
 
