@@ -24,6 +24,8 @@ public class TicTacToe {
                 "Введите количесво выиграшных одинаковых фишек: ");
 
         GameService gameService = new GameServiceImpl(fieldSize, numChipWin);
+        gameService.printPlayingField();
+        
         State state = State.NOT_FINISH;
         Player currentPlayer = Player.X;
 
