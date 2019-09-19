@@ -1,30 +1,12 @@
 package ru.eugene.java.learn.config;
 
-import org.springframework.cache.CacheManager;
-import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cache.ehcache.EhCacheCacheManager;
-import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
 
-import ru.eugene.java.learn.service.impl.MainServiceImpl;
+import org.springframework.context.annotation.Import;
+import ru.eugene.java.learn.service.impl.ExampleCacheServiceImpl;
 
 @Configuration
-@EnableCaching
-@ComponentScan(basePackageClasses = MainServiceImpl.class)
-public class SpringConfiguration {
-    @Bean
-    public CacheManager cacheManager() {
-        return new EhCacheCacheManager(ehCacheCacheManager().getObject());
-    }
-
-    @Bean
-    public EhCacheManagerFactoryBean ehCacheCacheManager() {
-        EhCacheManagerFactoryBean cmfb = new EhCacheManagerFactoryBean();
-        cmfb.setConfigLocation(new ClassPathResource("ehcache.xml"));
-        cmfb.setShared(true);
-        return cmfb;
-    }
-}
+@Import(EhCacheConfiguration.class)
+@ComponentScan(basePackageClasses = ExampleCacheServiceImpl.class)
+public class SpringConfiguration {}
