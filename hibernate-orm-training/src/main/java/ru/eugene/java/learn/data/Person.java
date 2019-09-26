@@ -1,10 +1,21 @@
 package ru.eugene.java.learn.data;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
 import java.util.List;
+import java.util.Objects;
 
 @Entity
-@Table(name = "person", uniqueConstraints = {@UniqueConstraint(name = "code_uk", columnNames = "code")})
+@Table(name = "person",
+        uniqueConstraints = @UniqueConstraint(name = "code_uq", columnNames = "code"))
 public class Person {
     @Id
     @SequenceGenerator(name = "id_seq", sequenceName = "id_seq", allocationSize = 1)
@@ -22,16 +33,6 @@ public class Person {
 
     @OneToMany(mappedBy = "person")
     private List<Automobile> automobiles;
-
-    @OneToOne(mappedBy = "person")
-    private Passport passport;
-
-    @ManyToOne(targetEntity = Company.class)
-    @JoinColumn(name = "company_id", foreignKey = @ForeignKey(name = "person_company_fk"))
-    private Company company;
-
-    @ManyToMany(targetEntity = Bank.class, mappedBy = "people")
-    private List<Bank> banks;
 
     public Long getId() {
         return id;
@@ -73,27 +74,19 @@ public class Person {
         this.automobiles = automobiles;
     }
 
-    public Passport getPassport() {
-        return passport;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return Objects.equals(id, person.id) &&
+                Objects.equals(name, person.name) &&
+                Objects.equals(surname, person.surname) &&
+                Objects.equals(code, person.code);
     }
 
-    public void setPassport(Passport passport) {
-        this.passport = passport;
-    }
-
-    public Company getCompany() {
-        return company;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
-    }
-
-    public List<Bank> getBanks() {
-        return banks;
-    }
-
-    public void setBanks(List<Bank> banks) {
-        this.banks = banks;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, surname, code);
     }
 }
