@@ -4,7 +4,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
+
 import ru.eugene.java.learn.data.Automobile;
+import ru.eugene.java.learn.parent.PersonAutomobileTestParent;
 
 @Transactional
 public class AutomobileRepositoryTest extends PersonAutomobileTestParent {

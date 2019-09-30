@@ -1,13 +1,16 @@
-package ru.eugene.java.learn.repository;
+package ru.eugene.java.learn.parent;
 
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
 import ru.eugene.java.learn.config.SpringConfiguration;
 import ru.eugene.java.learn.data.Automobile;
 import ru.eugene.java.learn.data.Person;
+import ru.eugene.java.learn.repository.AutomobileRepository;
+import ru.eugene.java.learn.repository.PersonRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = SpringConfiguration.class)
@@ -18,7 +21,7 @@ public class PersonAutomobileTestParent {
     @Autowired
     protected AutomobileRepository automobileRepository;
 
-    void initDB(){
+    protected void initDB(){
         Person person_1 = createPerson("name_1", "surname_1", "code_1");
         person_1 = personRepository.saveAndFlush(person_1);
         Assert.assertNotNull(person_1);

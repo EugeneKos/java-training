@@ -7,6 +7,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 import ru.eugene.java.learn.data.Automobile;
 import ru.eugene.java.learn.data.Person;
+import ru.eugene.java.learn.parent.PersonAutomobileTestParent;
 
 import java.util.Arrays;
 import java.util.List;
