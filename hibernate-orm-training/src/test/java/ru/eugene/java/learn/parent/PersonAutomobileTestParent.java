@@ -12,6 +12,9 @@ import ru.eugene.java.learn.data.Person;
 import ru.eugene.java.learn.repository.AutomobileRepository;
 import ru.eugene.java.learn.repository.PersonRepository;
 
+import static ru.eugene.java.learn.util.EntityUtils.createAutomobile;
+import static ru.eugene.java.learn.util.EntityUtils.createPerson;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = SpringConfiguration.class)
 public class PersonAutomobileTestParent {
@@ -52,21 +55,5 @@ public class PersonAutomobileTestParent {
         Automobile automobile_4 = createAutomobile("mark_4", "model_4", "state_number_4");
         automobile_4 = automobileRepository.saveAndFlush(automobile_4);
         Assert.assertNotNull(automobile_4);
-    }
-
-    private Person createPerson(String name, String surname, String code){
-        Person person = new Person();
-        person.setName(name);
-        person.setSurname(surname);
-        person.setCode(code);
-        return person;
-    }
-
-    private Automobile createAutomobile(String mark, String model, String stateNumber){
-        Automobile automobile = new Automobile();
-        automobile.setMark(mark);
-        automobile.setModel(model);
-        automobile.setStateNumber(stateNumber);
-        return automobile;
     }
 }
