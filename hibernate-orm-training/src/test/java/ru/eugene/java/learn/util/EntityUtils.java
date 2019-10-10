@@ -1,7 +1,6 @@
 package ru.eugene.java.learn.util;
 
 import ru.eugene.java.learn.data.Automobile;
-import ru.eugene.java.learn.data.Passport;
 import ru.eugene.java.learn.data.Person;
 
 public final class EntityUtils {
@@ -11,7 +10,7 @@ public final class EntityUtils {
         Person person = new Person();
         person.setName(name);
         person.setSurname(surname);
-        person.setCode(code);
+        person.setLogin(code);
         return person;
     }
 
@@ -21,12 +20,5 @@ public final class EntityUtils {
         automobile.setModel(model);
         automobile.setStateNumber(stateNumber);
         return automobile;
-    }
-
-    public static Passport createPassport(String number, String code){
-        Passport passport = new Passport();
-        passport.setNumber(number);
-        passport.setCode(code);
-        return passport;
     }
 }

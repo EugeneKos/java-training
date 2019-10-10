@@ -15,11 +15,11 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "person",
-        uniqueConstraints = @UniqueConstraint(name = "code_uq", columnNames = "code"))
+        uniqueConstraints = @UniqueConstraint(name = "login_uq", columnNames = "login"))
 public class Person {
     @Id
-    @SequenceGenerator(name = "id_seq", sequenceName = "id_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_seq")
+    @SequenceGenerator(name = "person_id_seq", sequenceName = "person_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "person_id_seq")
     private Long id;
 
     @Column(name = "name", nullable = false)
@@ -28,8 +28,8 @@ public class Person {
     @Column(name = "surname", nullable = false)
     private String surname;
 
-    @Column(name = "code", nullable = false)
-    private String code;
+    @Column(name = "login", nullable = false)
+    private String login;
 
     @OneToMany(mappedBy = "person")
     private List<Automobile> automobiles;
@@ -58,12 +58,12 @@ public class Person {
         this.surname = surname;
     }
 
-    public String getCode() {
-        return code;
+    public String getLogin() {
+        return login;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public List<Automobile> getAutomobiles() {
@@ -82,11 +82,11 @@ public class Person {
         return Objects.equals(id, person.id) &&
                 Objects.equals(name, person.name) &&
                 Objects.equals(surname, person.surname) &&
-                Objects.equals(code, person.code);
+                Objects.equals(login, person.login);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, surname, code);
+        return Objects.hash(id, name, surname, login);
     }
 }

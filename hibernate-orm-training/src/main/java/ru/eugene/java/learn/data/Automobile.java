@@ -21,8 +21,8 @@ import java.util.Objects;
 
 public class Automobile {
     @Id
-    @SequenceGenerator(name = "id_seq", sequenceName = "id_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_seq")
+    @SequenceGenerator(name = "automobile_id_seq", sequenceName = "automobile_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "automobile_id_seq")
     private Long id;
 
     @Column(name = "mark", nullable = false)

@@ -8,8 +8,6 @@ import ru.eugene.java.learn.data.Person;
 import ru.eugene.java.learn.repository.PersonRepository;
 import ru.eugene.java.learn.service.IPersonService;
 
-import java.util.Set;
-
 @Service
 public class PersonServiceImpl implements IPersonService {
     private PersonRepository personRepository;
@@ -21,13 +19,7 @@ public class PersonServiceImpl implements IPersonService {
 
     @Override
     @Transactional
-    public Person getByCode(String code) {
-        return personRepository.findByCode(code);
-    }
-
-    @Override
-    @Transactional
-    public Set<Person> getAllWithAutomobiles() {
-        return personRepository.findAllWithAutomobiles();
+    public Person getByLogin(String login) {
+        return personRepository.findByLogin(login);
     }
 }

@@ -1,4 +1,4 @@
-package ru.eugene.java.learn.service.impl;
+package ru.eugene.java.learn.service;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -8,31 +8,33 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import ru.eugene.java.learn.config.SpringConfiguration;
-import ru.eugene.java.learn.data.Bank;
 import ru.eugene.java.learn.data.Person;
 import ru.eugene.java.learn.repository.PersonRepository;
-import ru.eugene.java.learn.service.IBankService;
 import ru.eugene.java.learn.util.EntityUtils;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = SpringConfiguration.class)
-public class BankServiceImplTest {
+public class PersonServiceTest {
     @Autowired
-    private IBankService bankService;
+    private IPersonService personService;
 
     @Autowired
     private PersonRepository personRepository;
 
     @Test
-    public void addPersonToBankTest(){
-        Person person = EntityUtils.createPerson("name_1", "surname_1", "code_1");
-        person = personRepository.saveAndFlush(person);
+    public void getByLoginTest(){
+        String login = "zero";
+
+        Person person = createAndSave("Eugene", "Kosinov", login);
         Assert.assertNotNull(person);
 
-        Bank bank = bankService.create("SBER");
-        Assert.assertNotNull(bank);
+        person = personService.getByLogin(person.getLogin());
+        Assert.assertNotNull(person);
+        Assert.assertEquals(login, person.getLogin());
+    }
 
-        bankService.addPersonToBank(bank.getName(), person);
-        bankService.removePersonFromBank(bank.getName(), person.getCode());
+    private Person createAndSave(String name, String surname, String login){
+        Person person = EntityUtils.createPerson(name, surname, login);
+        return personRepository.saveAndFlush(person);
     }
 }
