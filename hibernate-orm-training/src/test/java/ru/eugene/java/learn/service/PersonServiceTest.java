@@ -8,9 +8,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import ru.eugene.java.learn.config.SpringConfiguration;
-import ru.eugene.java.learn.data.Person;
-import ru.eugene.java.learn.repository.PersonRepository;
-import ru.eugene.java.learn.util.EntityUtils;
+import ru.eugene.java.learn.data.dto.PersonDTO;
+import ru.eugene.java.learn.util.DTOUtils;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = SpringConfiguration.class)
@@ -18,23 +17,30 @@ public class PersonServiceTest {
     @Autowired
     private IPersonService personService;
 
-    @Autowired
-    private PersonRepository personRepository;
+    @Test
+    public void updateTest(){
+        PersonDTO personDTO = DTOUtils.createPersonDTO("Eugene", "Kosinov", "Kos123");
+
+        personDTO = personService.create(personDTO);
+        Assert.assertNotNull(personDTO);
+        Assert.assertNotNull(personDTO.getId());
+
+        personDTO.setSurname("Modychev");
+
+        personDTO = personService.update(personDTO);
+        Assert.assertNotNull(personDTO);
+        Assert.assertEquals("Modychev", personDTO.getSurname());
+    }
 
     @Test
     public void getByLoginTest(){
-        String login = "zero";
+        PersonDTO personDTO = DTOUtils.createPersonDTO("Eugene", "Kosinov", "Kos123");
 
-        Person person = createAndSave("Eugene", "Kosinov", login);
-        Assert.assertNotNull(person);
+        personDTO = personService.create(personDTO);
+        Assert.assertNotNull(personDTO);
+        Assert.assertNotNull(personDTO.getId());
 
-        person = personService.getByLogin(person.getLogin());
-        Assert.assertNotNull(person);
-        Assert.assertEquals(login, person.getLogin());
-    }
-
-    private Person createAndSave(String name, String surname, String login){
-        Person person = EntityUtils.createPerson(name, surname, login);
-        return personRepository.saveAndFlush(person);
+        PersonDTO foundedByLogin = personService.getByLogin("Kos123");
+        Assert.assertNotNull(foundedByLogin);
     }
 }

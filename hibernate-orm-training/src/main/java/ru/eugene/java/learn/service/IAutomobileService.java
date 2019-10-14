@@ -1,7 +1,9 @@
 package ru.eugene.java.learn.service;
 
-import ru.eugene.java.learn.data.Automobile;
+import ru.eugene.java.learn.data.dto.AutomobileDTO;
 
 public interface IAutomobileService {
-    Automobile getByStateNumber(String stateNumber);
+    AutomobileDTO create(AutomobileDTO automobileDTO);
+    AutomobileDTO update(AutomobileDTO automobileDTO);
+    AutomobileDTO getByStateNumber(String stateNumber);
 }
