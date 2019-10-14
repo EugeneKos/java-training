@@ -48,4 +48,15 @@ public class StandServiceTest {
         StandDTO editedStand = standService.editStand(standDTOByName);
         Assert.assertNotNull(editedStand);
     }
+
+    @Test
+    public void getStandByNameTest(){
+        StandDTO standDTO = DTOUtils.createStandDTO("Platon", "description 1");
+
+        standService.editStand(standDTO);
+
+        StandDTO foundedByName = standService.getStandByName("Platon");
+        Assert.assertNotNull(foundedByName);
+        Assert.assertEquals("Platon", foundedByName.getName());
+    }
 }
