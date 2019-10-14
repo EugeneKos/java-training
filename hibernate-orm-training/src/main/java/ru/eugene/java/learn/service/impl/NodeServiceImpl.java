@@ -74,4 +74,16 @@ public class NodeServiceImpl implements INodeService {
     public Set<NodeDTO> saveAll(Set<NodeDTO> nodeDTOSet) {
         return nodeDTOSet.stream().map(this::editNode).collect(Collectors.toSet());
     }
+
+    @Override
+    public Set<NodeDTO> getByIpAddress(String ipAddress) {
+        Set<Node> foundedByIpAddress = nodeRepository.findByIpAddress(ipAddress);
+        return nodeConverter.convertToNodeDTOSet(foundedByIpAddress);
+    }
+
+    @Override
+    public Set<NodeDTO> getByPort(String port) {
+        Set<Node> foundedByPort = nodeRepository.findByPort(port);
+        return nodeConverter.convertToNodeDTOSet(foundedByPort);
+    }
 }

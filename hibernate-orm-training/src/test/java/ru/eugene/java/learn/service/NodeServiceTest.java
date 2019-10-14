@@ -11,6 +11,10 @@ import ru.eugene.java.learn.config.SpringConfiguration;
 import ru.eugene.java.learn.data.dto.NodeDTO;
 import ru.eugene.java.learn.exception.NotUniqueException;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 import static ru.eugene.java.learn.util.DTOUtils.createNodeDTO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -66,5 +70,29 @@ public class NodeServiceTest {
         Assert.assertNotNull(dto1);
 
         nodeService.editNode(dto2);
+    }
+
+    @Test
+    public void getByIpAddressTest(){
+        NodeDTO dto1 = createNodeDTO("10.10.10.10", "2040", "description 1");
+        NodeDTO dto2 = createNodeDTO("10.10.10.10", "2030", "description 2");
+
+        nodeService.saveAll(new HashSet<>(Arrays.asList(dto1, dto2)));
+
+        Set<NodeDTO> foundedByIpAddress = nodeService.getByIpAddress("10.10.10.10");
+        Assert.assertNotNull(foundedByIpAddress);
+        Assert.assertEquals(2, foundedByIpAddress.size());
+    }
+
+    @Test
+    public void getByPortTest(){
+        NodeDTO dto1 = createNodeDTO("10.10.10.10", "3030", "description 1");
+        NodeDTO dto2 = createNodeDTO("25.14.50.31", "3030", "description 2");
+
+        nodeService.saveAll(new HashSet<>(Arrays.asList(dto1, dto2)));
+
+        Set<NodeDTO> foundedByPort = nodeService.getByPort("3030");
+        Assert.assertNotNull(foundedByPort);
+        Assert.assertEquals(2, foundedByPort.size());
     }
 }
