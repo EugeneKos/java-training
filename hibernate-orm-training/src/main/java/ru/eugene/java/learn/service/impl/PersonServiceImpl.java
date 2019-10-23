@@ -1,5 +1,6 @@
 package ru.eugene.java.learn.service.impl;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -7,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.eugene.java.learn.converter.PersonConverter;
 import ru.eugene.java.learn.data.Person;
 import ru.eugene.java.learn.data.dto.PersonDTO;
+import ru.eugene.java.learn.data.dto.PersonTreeDTO;
 import ru.eugene.java.learn.exception.NotFoundException;
 import ru.eugene.java.learn.exception.NotUniqueException;
 import ru.eugene.java.learn.repository.PersonRepository;
@@ -39,6 +41,8 @@ public class PersonServiceImpl implements IPersonService {
         assertExistById(person);
         assertUniqueByLogin(person);
 
+        fillAutomobiles(person);
+
         person = personRepository.saveAndFlush(person);
         return personConverter.convertToPersonDTO(person);
     }
@@ -64,10 +68,26 @@ public class PersonServiceImpl implements IPersonService {
         }
     }
 
+    private void fillAutomobiles(Person person){
+        if(person.getId() == null){
+            return;
+        }
+        Person foundedByIdWithAutomobiles = personRepository.findByIdWithAutomobiles(person.getId());
+        if(CollectionUtils.isNotEmpty(foundedByIdWithAutomobiles.getAutomobiles())){
+            person.setAutomobiles(foundedByIdWithAutomobiles.getAutomobiles());
+        }
+    }
+
     @Override
     @Transactional
     public PersonDTO getByLogin(String login) {
         Person foundedByLogin = personRepository.findByLogin(login);
         return personConverter.convertToPersonDTO(foundedByLogin);
+    }
+
+    @Override
+    public PersonTreeDTO getByLoginWithAutomobile(String login) {
+        Person foundedByLogin = personRepository.findByLoginWithAutomobiles(login);
+        return personConverter.convertToPersonTreeDTO(foundedByLogin);
     }
 }
