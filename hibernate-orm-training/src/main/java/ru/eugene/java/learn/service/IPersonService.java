@@ -8,4 +8,5 @@ public interface IPersonService {
     PersonDTO update(PersonDTO personDTO);
     PersonDTO getByLogin(String login);
     PersonTreeDTO getByLoginWithAutomobile(String login);
+    void deleteByLogin(String login);
 }

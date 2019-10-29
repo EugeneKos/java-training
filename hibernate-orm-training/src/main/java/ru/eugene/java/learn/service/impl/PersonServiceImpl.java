@@ -90,4 +90,10 @@ public class PersonServiceImpl implements IPersonService {
         Person foundedByLogin = personRepository.findByLoginWithAutomobiles(login);
         return personConverter.convertToPersonTreeDTO(foundedByLogin);
     }
+
+    @Override
+    @Transactional
+    public void deleteByLogin(String login) {
+        personRepository.deleteByLogin(login);
+    }
 }

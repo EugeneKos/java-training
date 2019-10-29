@@ -1,6 +1,7 @@
 package ru.eugene.java.learn.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -15,4 +16,8 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 
     @Query("select p from Person p left join fetch p.automobiles where p.login = :login")
     Person findByLoginWithAutomobiles(@Param("login") String login);
+
+    @Query("delete from Person p where p.login = :login")
+    @Modifying
+    void deleteByLogin(@Param("login") String login);
 }

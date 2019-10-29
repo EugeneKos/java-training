@@ -43,4 +43,19 @@ public class PersonServiceTest {
         PersonDTO foundedByLogin = personService.getByLogin("Kos123");
         Assert.assertNotNull(foundedByLogin);
     }
+
+    @Test
+    public void deleteByLoginTest(){
+        PersonDTO personDTO = DTOUtils.createPersonDTO("Eugene", "Kosinov", "Kos123");
+
+        personDTO = personService.create(personDTO);
+        Assert.assertNotNull(personDTO);
+        Assert.assertNotNull(personDTO.getId());
+        Assert.assertNotNull(personDTO.getLogin());
+
+        personService.deleteByLogin(personDTO.getLogin());
+
+        personDTO = personService.getByLogin(personDTO.getLogin());
+        Assert.assertNull(personDTO);
+    }
 }
