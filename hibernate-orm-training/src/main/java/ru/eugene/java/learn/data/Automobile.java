@@ -1,17 +1,28 @@
 package ru.eugene.java.learn.data;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
+import java.util.Objects;
 
 @Entity
 @Table(
         name = "automobile",
-        uniqueConstraints = {@UniqueConstraint(name = "state_number_uk", columnNames = "state_number")},
-        indexes = {@Index(name = "state_number_ix", columnList = "state_number")})
+        uniqueConstraints = @UniqueConstraint(name = "state_number_uq", columnNames = "state_number"))
 
 public class Automobile {
     @Id
-    @SequenceGenerator(name = "id_seq", sequenceName = "id_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_seq")
+    @SequenceGenerator(name = "automobile_id_seq", sequenceName = "automobile_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "automobile_id_seq")
     private Long id;
 
     @Column(name = "mark", nullable = false)
@@ -65,5 +76,22 @@ public class Automobile {
 
     public void setPerson(Person person) {
         this.person = person;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Automobile that = (Automobile) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(mark, that.mark) &&
+                Objects.equals(model, that.model) &&
+                Objects.equals(stateNumber, that.stateNumber) &&
+                Objects.equals(person, that.person);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, mark, model, stateNumber, person);
     }
 }

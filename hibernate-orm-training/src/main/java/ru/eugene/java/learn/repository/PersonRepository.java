@@ -1,18 +1,18 @@
 package ru.eugene.java.learn.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+
 import ru.eugene.java.learn.data.Person;
 
-import java.util.Optional;
+public interface PersonRepository extends JpaRepository<Person, Long> {
+    @Query("select p from Person p where p.login = :login")
+    Person findByLogin(@Param("login") String login);
 
-public interface PersonRepository extends CrudRepository<Person, Long> {
-    Optional<Person> getById(Long id);
-    Person findByCode(String code);
+    @Query("select p from Person p left join fetch p.automobiles where p.id = :id")
+    Person findByIdWithAutomobiles(@Param("id") Long id);
 
-    @Query("select p from Person p join fetch p.banks where p.code = :code")
-    Person findByCodeFetchBanks(@Param("code") String code);
-
-    void deleteByCode(String code);
+    @Query("select p from Person p left join fetch p.automobiles where p.login = :login")
+    Person findByLoginWithAutomobiles(@Param("login") String login);
 }
