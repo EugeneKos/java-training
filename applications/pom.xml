@@ -16,6 +16,7 @@
     <modules>
         <module>security</module>
         <module>tic-tac-toe</module>
+        <module>zip-unpacker</module>
     </modules>
 
 </project>
