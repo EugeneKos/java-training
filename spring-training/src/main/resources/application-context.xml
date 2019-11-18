@@ -4,5 +4,8 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <bean id="automobileFactory" class="ru.eugene.java.learn.factory.AutomobileFactory"/>
+
+    <bean id="automobile" factory-bean="automobileFactory" factory-method="createTransport"/>
 
 </beans>
