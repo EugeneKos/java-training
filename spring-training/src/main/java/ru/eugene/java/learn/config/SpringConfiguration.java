@@ -1,34 +1,32 @@
 package ru.eugene.java.learn.config;
 
-import org.springframework.context.annotation.*;
-import ru.eugene.java.learn.data.Car;
-import ru.eugene.java.learn.data.CarColor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 
-import java.awt.*;
+import ru.eugene.java.learn.data.Car;
+
+import java.awt.Color;
 import java.util.Random;
 
 @Configuration
-@ComponentScan(basePackages = "ru.eugene.java.learn")
 public class SpringConfiguration {
     @Bean
-    @Scope(value = "prototype")
-    public CarColor carColor() {
-        CarColor carColor = new CarColor();
-        carColor.setColor(new Color(new Random().nextInt(255),
-                new Random().nextInt(255),
-                new Random().nextInt(255)));
-
-        return carColor;
+    @Scope("prototype")
+    public Color color(){
+        return new Color(new Random()
+                .nextInt(255), new Random()
+                .nextInt(255), new Random()
+                .nextInt(255));
     }
 
     @Bean
     public Car car(){
-        Car car = new Car() {
+        return new Car() {
             @Override
-            public CarColor getCarColor() {
-                return carColor();
+            public Color getColor() {
+                return color();
             }
         };
-        return car;
     }
 }
