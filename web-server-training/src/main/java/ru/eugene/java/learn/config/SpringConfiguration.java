@@ -5,10 +5,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableMBeanExport;
 import org.springframework.context.annotation.Import;
 
-import ru.eugene.java.learn.service.impl.ExampleCacheServiceImpl;
-
 @Configuration
 @EnableMBeanExport
 @Import(EhCacheConfiguration.class)
-@ComponentScan(basePackageClasses = ExampleCacheServiceImpl.class)
+@ComponentScan(basePackages = {"ru.eugene.java.learn.service"})
 public class SpringConfiguration {}
