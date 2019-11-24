@@ -18,6 +18,7 @@
         <module>other-training</module>
         <module>algorithm-training</module>
         <module>web-server-training</module>
+        <module>spring-boot-training</module>
     </modules>
 
     <build>
