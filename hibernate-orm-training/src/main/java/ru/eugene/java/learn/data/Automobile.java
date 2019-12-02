@@ -38,6 +38,15 @@ public class Automobile {
     @JoinColumn(name = "person_id", foreignKey = @ForeignKey(name = "automobile_person_fk"))
     private Person person;
 
+    public Automobile() {
+    }
+
+    public Automobile(String mark, String model, String stateNumber) {
+        this.mark = mark;
+        this.model = model;
+        this.stateNumber = stateNumber;
+    }
+
     public Long getId() {
         return id;
     }

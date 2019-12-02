@@ -18,7 +18,7 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "ru.eugene.java.learn.repository")
-@PropertySource("classpath:config.properties")
+@PropertySource("classpath:database-config.properties")
 public class DataConfiguration {
     @Value("${database.driver.class}")
     private String driverClassName;

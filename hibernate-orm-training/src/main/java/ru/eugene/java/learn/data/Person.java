@@ -34,6 +34,15 @@ public class Person {
     @OneToMany(mappedBy = "person")
     private List<Automobile> automobiles;
 
+    public Person() {
+    }
+
+    public Person(String name, String surname, String login) {
+        this.name = name;
+        this.surname = surname;
+        this.login = login;
+    }
+
     public Long getId() {
         return id;
     }
