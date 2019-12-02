@@ -9,8 +9,10 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import ru.eugene.java.learn.config.DomainConfiguration;
+import ru.eugene.java.learn.data.Apartment;
 import ru.eugene.java.learn.data.Automobile;
 import ru.eugene.java.learn.data.Person;
+import ru.eugene.java.learn.repository.ApartmentRepository;
 import ru.eugene.java.learn.repository.AutomobileRepository;
 import ru.eugene.java.learn.repository.PersonRepository;
 
@@ -23,6 +25,9 @@ public class DatabaseInitializer {
 
     @Autowired
     private AutomobileRepository automobileRepository;
+
+    @Autowired
+    private ApartmentRepository apartmentRepository;
 
     @Test
     public void fillDatabase(){
@@ -42,6 +47,15 @@ public class DatabaseInitializer {
 
             automobileRepository.saveAndFlush(automobile_1);
             automobileRepository.saveAndFlush(automobile_2);
+
+            Apartment apartment_1 = new Apartment("apartment_address_a" + i);
+            apartment_1.setPerson(person);
+
+            Apartment apartment_2 = new Apartment("apartment_address_b" + i);
+            apartment_2.setPerson(person);
+
+            apartmentRepository.saveAndFlush(apartment_1);
+            apartmentRepository.saveAndFlush(apartment_2);
         }
     }
 

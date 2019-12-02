@@ -31,8 +31,11 @@ public class Person {
     @Column(name = "login", nullable = false)
     private String login;
 
-    @OneToMany(mappedBy = "person")
+    @OneToMany(targetEntity = Automobile.class, mappedBy = "person")
     private List<Automobile> automobiles;
+
+    @OneToMany(targetEntity = Apartment.class, mappedBy = "person")
+    private List<Apartment> apartments;
 
     public Person() {
     }
@@ -81,6 +84,14 @@ public class Person {
 
     public void setAutomobiles(List<Automobile> automobiles) {
         this.automobiles = automobiles;
+    }
+
+    public List<Apartment> getApartments() {
+        return apartments;
+    }
+
+    public void setApartments(List<Apartment> apartments) {
+        this.apartments = apartments;
     }
 
     @Override
