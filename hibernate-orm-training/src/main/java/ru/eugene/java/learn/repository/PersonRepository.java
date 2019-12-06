@@ -1,5 +1,6 @@
 package ru.eugene.java.learn.repository;
 
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -18,4 +19,8 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
     // Используем distinct поскольку для каждого автомобиля вернется свой Person
     @Query("select distinct p from Person p join fetch p.automobiles")
     List<Person> findAllWithAutomobile();
+
+    @EntityGraph(type = EntityGraph.EntityGraphType.FETCH, attributePaths = {"apartments"})
+    @Query("select p from Person p")
+    List<Person> loadAllPersonApartments();
 }

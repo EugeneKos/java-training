@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import ru.eugene.java.learn.config.DomainConfiguration;
+import ru.eugene.java.learn.data.Apartment;
 import ru.eugene.java.learn.data.Automobile;
 import ru.eugene.java.learn.data.Person;
 import ru.eugene.java.learn.repository.PersonRepository;
@@ -22,7 +23,7 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = DomainConfiguration.class)
 @TestPropertySource("classpath:db-test-config.properties")
-public class PersonAutomobileFetchExample {
+public class PersonRepositoryFetchExample {
     @Autowired
     private PersonRepository personRepository;
 
@@ -90,6 +91,19 @@ public class PersonAutomobileFetchExample {
             List<Automobile> automobiles = person.getAutomobiles();
             Assert.assertNotNull(automobiles);
             Assert.assertEquals(2, automobiles.size());
+        }
+    }
+
+    @Test
+    public void loadAllPersonApartmentsTest(){
+        List<Person> people = personRepository.loadAllPersonApartments();
+        Assert.assertNotNull(people);
+        Assert.assertEquals(10, people.size());
+
+        for (Person person : people){
+            List<Apartment> apartments = person.getApartments();
+            Assert.assertNotNull(apartments);
+            Assert.assertEquals(2, apartments.size());
         }
     }
 
