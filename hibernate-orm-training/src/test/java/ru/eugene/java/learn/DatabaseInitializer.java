@@ -11,10 +11,16 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ru.eugene.java.learn.config.DomainConfiguration;
 import ru.eugene.java.learn.data.Apartment;
 import ru.eugene.java.learn.data.Automobile;
+import ru.eugene.java.learn.data.Group;
 import ru.eugene.java.learn.data.Person;
 import ru.eugene.java.learn.repository.ApartmentRepository;
 import ru.eugene.java.learn.repository.AutomobileRepository;
+import ru.eugene.java.learn.repository.GroupRepository;
 import ru.eugene.java.learn.repository.PersonRepository;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = DomainConfiguration.class)
@@ -28,6 +34,9 @@ public class DatabaseInitializer {
 
     @Autowired
     private ApartmentRepository apartmentRepository;
+
+    @Autowired
+    private GroupRepository groupRepository;
 
     @Test
     public void fillDatabase(){
@@ -57,6 +66,46 @@ public class DatabaseInitializer {
             apartmentRepository.saveAndFlush(apartment_1);
             apartmentRepository.saveAndFlush(apartment_2);
         }
+    }
+
+    @Test
+    public void fillGroups(){
+        Group child_1Level_3 = new Group("child_1_level_3");
+        Group child_2Level_3 = new Group("child_2_level_3");
+        Group child_3Level_3 = new Group("child_3_level_3");
+
+        groupRepository.saveAndFlush(child_1Level_3);
+        groupRepository.saveAndFlush(child_2Level_3);
+        groupRepository.saveAndFlush(child_3Level_3);
+
+        Group child_1Level_2 = new Group("child_1_level_2");
+        child_1Level_2.setChildrenGroups(new HashSet<>(Collections.singleton(child_1Level_3)));
+        groupRepository.saveAndFlush(child_1Level_2);
+
+        Group child_2Level_2 = new Group("child_2_level_2");
+        child_2Level_2.setChildrenGroups(new HashSet<>(Collections.singleton(child_2Level_3)));
+        groupRepository.saveAndFlush(child_2Level_2);
+
+        Group child_3Level_2 = new Group("child_3_level_2");
+        child_3Level_2.setChildrenGroups(new HashSet<>(Collections.singleton(child_3Level_3)));
+        groupRepository.saveAndFlush(child_3Level_2);
+
+        Group child_1Level_1 = new Group("child_1_level_1");
+        child_1Level_1.setChildrenGroups(new HashSet<>(Collections.singleton(child_1Level_2)));
+        groupRepository.saveAndFlush(child_1Level_1);
+
+        Group child_2Level_1 = new Group("child_2_level_1");
+        child_2Level_1.setChildrenGroups(new HashSet<>(Collections.singleton(child_2Level_2)));
+        groupRepository.saveAndFlush(child_2Level_1);
+
+        Group child_3Level_1 = new Group("child_3_level_1");
+        child_3Level_1.setChildrenGroups(new HashSet<>(Collections.singleton(child_3Level_2)));
+        groupRepository.saveAndFlush(child_3Level_1);
+
+
+        Group parent = new Group("parent");
+        parent.setChildrenGroups(new HashSet<>(Arrays.asList(child_1Level_1, child_2Level_1, child_3Level_1)));
+        groupRepository.saveAndFlush(parent);
     }
 
 

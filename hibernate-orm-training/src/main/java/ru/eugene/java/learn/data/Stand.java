@@ -17,7 +17,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "stand", uniqueConstraints = @UniqueConstraint(name = "name_uq", columnNames = "name"))
+@Table(name = "stand", uniqueConstraints = @UniqueConstraint(name = "stand_name_uq", columnNames = "name"))
 public class Stand {
     @Id
     @SequenceGenerator(name = "stand_id_seq", sequenceName = "stand_id_seq", allocationSize = 1)
