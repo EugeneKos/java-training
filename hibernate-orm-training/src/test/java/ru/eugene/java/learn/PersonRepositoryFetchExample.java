@@ -19,6 +19,7 @@ import ru.eugene.java.learn.data.Person;
 import ru.eugene.java.learn.repository.PersonRepository;
 
 import java.util.List;
+import java.util.Set;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = DomainConfiguration.class)
@@ -39,7 +40,7 @@ public class PersonRepositoryFetchExample {
         Person person = personRepository.findByLogin("login_1");
         Assert.assertNotNull(person);
 
-        List<Automobile> automobiles = person.getAutomobiles();
+        Set<Automobile> automobiles = person.getAutomobiles();
         Assert.assertNotNull(automobiles);
         Assert.assertNotEquals(0, automobiles.size());
     }
@@ -51,7 +52,7 @@ public class PersonRepositoryFetchExample {
         Person person = personRepository.findByLogin("login_1");
         Assert.assertNotNull(person);
 
-        List<Automobile> automobiles = person.getAutomobiles();
+        Set<Automobile> automobiles = person.getAutomobiles();
         Assert.assertNotNull(automobiles);
         Assert.assertEquals(2, automobiles.size());
     }
@@ -62,7 +63,7 @@ public class PersonRepositoryFetchExample {
         Person person = personRepository.findByLoginWithAutomobile("login_1");
         Assert.assertNotNull(person);
 
-        List<Automobile> automobiles = person.getAutomobiles();
+        Set<Automobile> automobiles = person.getAutomobiles();
         Assert.assertNotNull(automobiles);
         Assert.assertEquals(2, automobiles.size());
     }
@@ -75,7 +76,7 @@ public class PersonRepositoryFetchExample {
         Assert.assertEquals(10, all.size());
 
         for (Person person : all){
-            List<Automobile> automobiles = person.getAutomobiles();
+            Set<Automobile> automobiles = person.getAutomobiles();
             Assert.assertNotNull(automobiles);
             Assert.assertEquals(2, automobiles.size());
         }
@@ -88,7 +89,7 @@ public class PersonRepositoryFetchExample {
         Assert.assertEquals(10, all.size());
 
         for (Person person : all){
-            List<Automobile> automobiles = person.getAutomobiles();
+            Set<Automobile> automobiles = person.getAutomobiles();
             Assert.assertNotNull(automobiles);
             Assert.assertEquals(2, automobiles.size());
         }
@@ -101,10 +102,15 @@ public class PersonRepositoryFetchExample {
         Assert.assertEquals(10, people.size());
 
         for (Person person : people){
-            List<Apartment> apartments = person.getApartments();
+            Set<Apartment> apartments = person.getApartments();
             Assert.assertNotNull(apartments);
             Assert.assertEquals(2, apartments.size());
         }
     }
 
+    @Test
+    public void loadAllPersonAutomobilesApartmentsTest(){
+        Set<Person> people = personRepository.loadAllPersonAutomobilesApartments();
+        Assert.assertNotNull(people);
+    }
 }

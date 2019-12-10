@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import ru.eugene.java.learn.data.Person;
 
 import java.util.List;
+import java.util.Set;
 
 public interface PersonRepository extends JpaRepository<Person, Long> {
     @Query("select p from Person p where p.login = :login")
@@ -23,4 +24,8 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
     @EntityGraph(type = EntityGraph.EntityGraphType.FETCH, attributePaths = {"apartments"})
     @Query("select p from Person p")
     List<Person> loadAllPersonApartments();
+
+    @EntityGraph(type = EntityGraph.EntityGraphType.FETCH, attributePaths = {"apartments", "automobiles"})
+    @Query("select p from Person p")
+    Set<Person> loadAllPersonAutomobilesApartments();
 }

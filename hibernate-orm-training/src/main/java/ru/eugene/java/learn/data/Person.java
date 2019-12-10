@@ -10,7 +10,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import java.util.List;
+import java.util.Set;
 import java.util.Objects;
 
 @Entity
@@ -32,10 +32,10 @@ public class Person {
     private String login;
 
     @OneToMany(targetEntity = Automobile.class, mappedBy = "person")
-    private List<Automobile> automobiles;
+    private Set<Automobile> automobiles;
 
     @OneToMany(targetEntity = Apartment.class, mappedBy = "person")
-    private List<Apartment> apartments;
+    private Set<Apartment> apartments;
 
     public Person() {
     }
@@ -78,19 +78,19 @@ public class Person {
         this.login = login;
     }
 
-    public List<Automobile> getAutomobiles() {
+    public Set<Automobile> getAutomobiles() {
         return automobiles;
     }
 
-    public void setAutomobiles(List<Automobile> automobiles) {
+    public void setAutomobiles(Set<Automobile> automobiles) {
         this.automobiles = automobiles;
     }
 
-    public List<Apartment> getApartments() {
+    public Set<Apartment> getApartments() {
         return apartments;
     }
 
-    public void setApartments(List<Apartment> apartments) {
+    public void setApartments(Set<Apartment> apartments) {
         this.apartments = apartments;
     }
 
