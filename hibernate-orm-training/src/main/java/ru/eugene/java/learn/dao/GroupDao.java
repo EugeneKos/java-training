@@ -47,4 +47,16 @@ public class GroupDao {
 
         return query.getSingleResult();
     }
+
+    // Получаю полное дерево за два запроса
+    // Первый запрос на получение всех груп с детьми
+    // Поскольку все произходит в одной транзакции берем обычным запросом группу по имени
+    // и получаем ее со всеми детьми.
+    @Transactional
+    public Group getGroupTreeByParentName(String name){
+        entityManager.createQuery("select distinct g from Group g left join fetch g.childrenGroups").getResultList();
+        return entityManager.createQuery("select g from Group g where g.name = :name", Group.class)
+                .setParameter("name", name)
+                .getSingleResult();
+    }
 }

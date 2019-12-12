@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import ru.eugene.java.learn.config.DomainConfiguration;
 import ru.eugene.java.learn.data.Group;
@@ -31,6 +32,12 @@ public class GroupFetchExample {
     }
 
     @Test
+    public void getGroupTreeByParentNameTest(){
+        Group groupTreeByParentName = groupDao.getGroupTreeByParentName("parent");
+        Assert.assertNotNull(groupTreeByParentName);
+    }
+
+    @Test
     public void findByNameTest(){
         Group parent = groupRepository.findByName("parent");
         Assert.assertNotNull(parent);
@@ -45,6 +52,15 @@ public class GroupFetchExample {
     @Test
     public void loadGroupWithChildrenByNameTest(){
         Group parent = groupRepository.loadGroupWithChildrenByName("parent");
+        Assert.assertNotNull(parent);
+    }
+
+    @Test
+    @Transactional
+    public void findAllGroupsWithTheirChildrenAndByNameTest(){
+        groupRepository.findAllGroupsWithTheirChildren();
+
+        Group parent = groupRepository.findByName("parent");
         Assert.assertNotNull(parent);
     }
 }
