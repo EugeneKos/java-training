@@ -15,3 +15,5 @@ select count(mark) from orm.automobile;
 
 select automobile.mark, automobile.model, person.login, person.name from orm.automobile right join orm.person
 on automobile.person_id = person.id where person.login = '333';
+
+update orm.person set name = 'new Name', surname = 'new Surname', login = 'new Login' where id = 1;
