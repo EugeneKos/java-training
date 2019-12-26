@@ -7,6 +7,6 @@ import org.springframework.context.annotation.Import;
 
 @Configuration
 @EnableMBeanExport
-@Import(EhCacheConfiguration.class)
+@Import({EhCacheConfiguration.class, PeriodicTaskConfiguration.class})
 @ComponentScan(basePackages = {"ru.eugene.java.learn.service"})
 public class SpringConfiguration {}
