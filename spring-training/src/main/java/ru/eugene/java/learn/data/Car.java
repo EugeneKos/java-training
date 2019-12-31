@@ -1,12 +1,10 @@
 package ru.eugene.java.learn.data;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import java.awt.Color;
 
 public abstract class Car {
     private String mark;
     private String model;
-    private CarColor carColor;
 
     public String getMark() {
         return mark;
@@ -24,9 +22,5 @@ public abstract class Car {
         this.model = model;
     }
 
-    public abstract CarColor getCarColor();
-
-    public void setCarColor(CarColor carColor) {
-        this.carColor = carColor;
-    }
+    public abstract Color getColor();
 }
