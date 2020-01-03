@@ -1,4 +1,4 @@
-package ru.eugene.java.learn.servlet;
+package ru.eugene.java.learn.http.servlet;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
