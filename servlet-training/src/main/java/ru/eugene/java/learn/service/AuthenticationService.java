@@ -7,6 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 
 public interface AuthenticationService {
     boolean isAuthenticated(HttpServletRequest request);
-    void authentication(String login, String password, HttpServletResponse response) throws AuthenticationException;
+    void authentication(String login, String password, HttpServletRequest request, HttpServletResponse response) throws AuthenticationException;
     void logout(HttpServletRequest request, HttpServletResponse response);
 }

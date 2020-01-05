@@ -5,6 +5,7 @@ import ru.eugene.java.learn.service.AuthenticationService;
 import ru.eugene.java.learn.service.ServiceContext;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+@WebServlet(urlPatterns = "/auth")
 public class AuthenticationServlet extends HttpServlet {
     private static final long serialVersionUID = 6959517331172456696L;
 
@@ -20,14 +22,11 @@ public class AuthenticationServlet extends HttpServlet {
         String login = request.getParameter("login");
         String password = request.getParameter("password");
 
-        HttpSession session = request.getSession();
-
         AuthenticationService authenticationService = ServiceContext.getAuthenticationService();
 
         try {
-            authenticationService.authentication(login, password, response);
-            session.setAttribute("personLogin", login);
-            response.sendRedirect("person");
+            authenticationService.authentication(login, password, request, response);
+            response.sendRedirect("main");
         } catch (AuthenticationException e) {
             request.getRequestDispatcher("/WEB-INF/views/authentication.jsp").forward(request, response);
         }
@@ -38,7 +37,7 @@ public class AuthenticationServlet extends HttpServlet {
         AuthenticationService authenticationService = ServiceContext.getAuthenticationService();
 
         if(authenticationService.isAuthenticated(request)){
-            response.sendRedirect("person");
+            response.sendRedirect("main");
             return;
         }
 

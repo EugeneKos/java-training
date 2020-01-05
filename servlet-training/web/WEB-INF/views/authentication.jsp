@@ -12,12 +12,12 @@
 </head>
 <body>
     <p><h2>Welcome to authentication page</h2></p>
-    <form action="authentication" method="post">
+    <form action="auth" method="post">
         <p>Login <input type="text" name="login"></p>
         <p>Password <input type="password" name="password"></p>
         <p><input type="submit" value="authenticate"></p>
     </form>
-    <form action="registration" method="get">
+    <form action="reg" method="get">
         <input type="submit" value="registration">
     </form>
 </body>

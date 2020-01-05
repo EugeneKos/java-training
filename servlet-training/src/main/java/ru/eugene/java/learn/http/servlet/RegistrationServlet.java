@@ -5,6 +5,7 @@ import ru.eugene.java.learn.service.PersonService;
 import ru.eugene.java.learn.service.ServiceContext;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+@WebServlet(urlPatterns = "/reg")
 public class RegistrationServlet extends HttpServlet {
     private static final long serialVersionUID = 5268180314909001144L;
 

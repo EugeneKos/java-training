@@ -12,7 +12,7 @@
 </head>
 <body>
     <p><h2>Welcome to registration page</h2></p>
-    <form action="registration" method="post">
+    <form action="reg" method="post">
         <p>First Name <input type="text" name="firstName"></p>
         <p>Last Name <input type="text" name="lastName"></p>
         <p>Login <input type="text" name="login"></p>
