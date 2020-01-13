@@ -4,7 +4,6 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import ru.eugene.java.learn.factory.Automobile;
 import ru.eugene.java.learn.factory.Transport;
 
 public class SpringFactoryMethodTest {
@@ -14,7 +13,7 @@ public class SpringFactoryMethodTest {
                 "classpath:application-context.xml"
         );
 
-        Transport transport = applicationContext.getBean(Automobile.class);
+        Transport transport = applicationContext.getBean(Transport.class);
         transport.motion();
     }
 }
