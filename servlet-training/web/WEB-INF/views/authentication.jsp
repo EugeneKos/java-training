@@ -1,23 +1,16 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: eugene
-  Date: 02.01.20
-  Time: 15:24
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>Authentication Page</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <p><h2>Welcome to authentication page</h2></p>
-    <form action="auth" method="post">
-        <p>Login <input type="text" name="login"></p>
-        <p>Password <input type="password" name="password"></p>
+    <form class="box" action="auth" method="post">
+        <p><h2>Welcome to authentication page</h2></p>
+        <p><h4>Login</h4> <input type="text" placeholder="Login" name="login"></p>
+        <p><h4>Password</h4> <input type="password" placeholder="Password" name="password"></p>
         <p><input type="submit" value="authenticate"></p>
     </form>
-    <form action="reg" method="get">
+    <form class="reg-button" action="reg" method="get">
         <input type="submit" value="registration">
     </form>
 </body>
