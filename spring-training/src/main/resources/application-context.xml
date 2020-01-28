@@ -6,6 +6,9 @@
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
+    <import resource="classpath:spring/springContext1.xml"/>
+    <import resource="classpath:spring/springContext2.xml"/>
+
     <bean id="automobileFactory" class="ru.eugene.java.learn.factory.AutomobileFactory"/>
 
     <bean id="automobile" factory-bean="automobileFactory" factory-method="createTransport"/>
