@@ -61,6 +61,17 @@ public class SorterTest {
     }
 
     @Test
+    public void quickSortTest_2(){
+        int[] array = {45, 23, 1, 77, 10, 5, 98, 2, 1};
+        Sorters.quickSort(array);
+        System.out.println("Quick sorted array 2: " + Arrays.toString(array));
+
+        Assert.assertArrayEquals("compare arrays",
+                new int[]{1, 1, 2, 5, 10, 23, 45, 77, 98},
+                array);
+    }
+
+    @Test
     public void benchmark(){
         int[] array = {45, 23, 1, 77, 10, 5, 98, 2, 1};
 
@@ -78,5 +89,10 @@ public class SorterTest {
         sorter.quickSort(array);
         finTime = System.nanoTime();
         System.out.println("Quick sort dif time: " + (finTime - startTime));
+
+        startTime = System.nanoTime();
+        Sorters.quickSort(array);
+        finTime = System.nanoTime();
+        System.out.println("Quick sort 2 dif time: " + (finTime - startTime));
     }
 }
