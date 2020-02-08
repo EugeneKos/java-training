@@ -12,6 +12,7 @@
 
     <import resource="classpath:spring/springContext1.xml"/>
     <import resource="classpath:spring/springContext2.xml"/>
+    <import resource="classpath:spring/bppContext.xml"/>
 
     <bean id="automobileFactory" class="ru.eugene.java.learn.factory.AutomobileFactory"/>
 
