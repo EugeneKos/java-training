@@ -1,5 +1,6 @@
 package ru.eugene.java.learn;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import org.springframework.context.ApplicationContext;
@@ -13,6 +14,6 @@ public class SpringAnnotationContextTest {
     public void annotationContextSpring(){
         ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
         MyAnnotatedBean2 myAnnotatedBean2 = context.getBean(MyAnnotatedBean2.class);
-        System.out.println(myAnnotatedBean2);
+        Assert.assertNotNull(myAnnotatedBean2);
     }
 }
