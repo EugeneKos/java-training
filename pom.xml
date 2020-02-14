@@ -19,6 +19,7 @@
         <module>algorithm-training</module>
         <module>web-server-training</module>
         <module>servlet-training</module>
+        <module>sql-training</module>
     </modules>
 
     <build>

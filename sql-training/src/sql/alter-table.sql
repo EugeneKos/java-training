@@ -1,0 +1,1 @@
+alter table "sql-training".automobile add power integer;
