@@ -28,3 +28,13 @@ select avg (automobile.power) as avg_power from "sql-training".automobile;
 
 -- sum показывает сумму --
 select sum (automobile.power) as sum_power from "sql-training".automobile;
+
+-- order by сортировка по возрастанию/убыванию
+select person.name, person.code from "sql-training".person order by person.name desc, person.code asc;
+
+-- group by группирование по колонкам с одинаковыми значениями
+select count(mark), color from "sql-training".automobile where color like '%e%' group by color;
+select max(power), color from "sql-training".automobile group by color order by color desc;
+
+-- having используется для условий агрегирующих функций
+select count(mark), color from "sql-training".automobile where color like '%e%' group by color having count(mark) > 1;
