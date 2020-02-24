@@ -37,6 +37,13 @@ public class Stand {
     )
     private Set<Node> nodes;
 
+    public Stand() {
+    }
+
+    public Stand(String name) {
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }
