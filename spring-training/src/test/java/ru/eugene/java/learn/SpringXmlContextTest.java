@@ -8,6 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import ru.eugene.java.learn.beans.MyBean2;
 import ru.eugene.java.learn.beans.MyBean3;
+import ru.eugene.java.learn.beans.MyBean4;
 import ru.eugene.java.learn.data.MyAnnotatedBean2;
 
 public class SpringXmlContextTest {
@@ -22,6 +23,9 @@ public class SpringXmlContextTest {
 
         MyBean3 myBean3 = applicationContext.getBean(MyBean3.class);
         myBean3.do3();
+
+        MyBean4 myBean4 = applicationContext.getBean(MyBean4.class);
+        myBean4.do4();
     }
 
     @Test
