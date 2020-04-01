@@ -3,6 +3,8 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="myBean1" class="ru.eugene.java.learn.beans.MyBean1"/>
+    <bean id="myBean1" class="ru.eugene.java.learn.beans.MyBean1">
+        <constructor-arg name="name" value="${name}"/>
+    </bean>
 
 </beans>

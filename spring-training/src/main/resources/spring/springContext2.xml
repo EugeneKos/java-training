@@ -7,4 +7,6 @@
         <constructor-arg ref="myBean1"/>
     </bean>
 
+    <bean id="myBean4" class="ru.eugene.java.learn.beans.MyBean4"/>
+
 </beans>
