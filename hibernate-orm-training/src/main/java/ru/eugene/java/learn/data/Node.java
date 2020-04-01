@@ -31,6 +31,14 @@ public class Node {
     @Column(name = "description")
     private String description;
 
+    public Node() {
+    }
+
+    public Node(String ipAddress, String port) {
+        this.ipAddress = ipAddress;
+        this.port = port;
+    }
+
     public Long getId() {
         return id;
     }

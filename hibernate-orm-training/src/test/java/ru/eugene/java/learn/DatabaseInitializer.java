@@ -9,18 +9,13 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import ru.eugene.java.learn.config.DomainConfiguration;
-import ru.eugene.java.learn.data.Apartment;
-import ru.eugene.java.learn.data.Automobile;
-import ru.eugene.java.learn.data.Group;
-import ru.eugene.java.learn.data.Person;
-import ru.eugene.java.learn.repository.ApartmentRepository;
-import ru.eugene.java.learn.repository.AutomobileRepository;
-import ru.eugene.java.learn.repository.GroupRepository;
-import ru.eugene.java.learn.repository.PersonRepository;
+import ru.eugene.java.learn.data.*;
+import ru.eugene.java.learn.repository.*;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Set;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = DomainConfiguration.class)
@@ -37,6 +32,12 @@ public class DatabaseInitializer {
 
     @Autowired
     private GroupRepository groupRepository;
+
+    @Autowired
+    private StandRepository standRepository;
+
+    @Autowired
+    private NodeRepository nodeRepository;
 
     @Test
     public void fillDatabase(){
@@ -108,5 +109,38 @@ public class DatabaseInitializer {
         groupRepository.saveAndFlush(parent);
     }
 
+
+    @Test
+    public void standsNodesDBInitialize(){
+        Node n1 = new Node("111.22.33.44", "1122");
+        Node n2 = new Node("111.22.33.45", "1123");
+        Node n3 = new Node("111.22.33.46", "1124");
+        Node n4 = new Node("111.22.33.47", "1125");
+        Node n5 = new Node("111.22.33.48", "1126");
+        Node n6 = new Node("111.22.33.49", "1127");
+
+        Set<Node> nodes = new HashSet<>(Arrays.asList(n1, n2, n3, n4, n5, n6));
+        nodeRepository.saveAll(nodes);
+
+        Set<Stand> stands = new HashSet<>();
+
+        Stand s1 = new Stand("stand_1");
+        s1.setNodes(new HashSet<>(Arrays.asList(n1, n2, n4)));
+        stands.add(s1);
+
+        Stand s2 = new Stand("stand_2");
+        s2.setNodes(new HashSet<>(Arrays.asList(n1, n3, n6)));
+        stands.add(s2);
+
+        Stand s3 = new Stand("stand_3");
+        s3.setNodes(new HashSet<>(Arrays.asList(n4, n2, n5)));
+        stands.add(s3);
+
+        Stand s4 = new Stand("stand_4");
+        s4.setNodes(new HashSet<>(Arrays.asList(n3, n6, n5)));
+        stands.add(s4);
+
+        standRepository.saveAll(stands);
+    }
 
 }
