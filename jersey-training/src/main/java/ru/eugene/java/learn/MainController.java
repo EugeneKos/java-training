@@ -1,4 +1,4 @@
-package ru.eugene.java.learn.qwqwqwqw;
+package ru.eugene.java.learn;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MainController {
     @GetMapping("/main")
     public String main(){
-        System.out.println("ssssssssssssssssssssssssssssssssssssss");
         return "main";
     }
 }
